@@ -11701,6 +11701,34 @@ html {
   width: 400px;
 }
 
+/* Styling untuk Gambar Profil */
+.git-img {
+  width: 230px;
+  height: 230px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover Effect */
+.git-img:hover {
+  transform: scale(1.1);
+}
+
+/* Styling untuk Keterangan */
+.hover-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #6c757d;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Menampilkan Keterangan saat Hover */
+.git-img:hover + .hover-text {
+  opacity: 1;
+}
+
 
 @media (max-width: 576px) {
   .profile {
@@ -11732,6 +11760,15 @@ html {
 
   .pp{
     display: none;
+  }
+
+  .card h2{
+    font-size: 18px;
+  }
+
+  .git-img {
+    width: 160px;
+    height: 160px;
   }
 }
 
