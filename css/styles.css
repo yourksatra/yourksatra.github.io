@@ -11766,6 +11766,10 @@ html {
     font-size: 18px;
   }
 
+  .card p{
+    fint-size: 12px;
+  }
+
   .git-img {
     width: 160px;
     height: 160px;
