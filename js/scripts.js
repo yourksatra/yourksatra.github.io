@@ -74,6 +74,21 @@ function openModal(element) {
         modalFooter.appendChild(thumbnail);
     }
 
+// js/scripts.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+// Tambahkan konfigurasi Firebase di sini
+const firebaseConfig = {
+    apiKey: "AIzaSyAIN63oj7OWScZ5kV0G7MxQL1bq3rgGcF0",
+    authDomain: "webmoneynote.firebaseapp.com",
+    projectId: "webmoneynote",
+    storageBucket: "webmoneynote.firebasestorage.app",
+    messagingSenderId: "916249252817",
+    appId: "1:916249252817:web:7359ed42699da26e60c6f0",
+    measurementId: "G-732CV0099G"
+  };
+
     // Tampilkan modal
     const modal = new bootstrap.Modal(document.getElementById('projectModal'));
     modal.show();
