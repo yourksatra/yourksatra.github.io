@@ -23,7 +23,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         
-        async function simpanPengeluaran() {
+        window.simpanPengeluaran = async function () {
             const tanggal = document.getElementById("tanggal").value;
             const kategori = document.getElementById("kategori").value;
             const jumlah = document.getElementById("jumlah").value;
