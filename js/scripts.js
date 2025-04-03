@@ -160,6 +160,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // ** Panggil fungsi hanya jika elemen ada **
-if (tahunSelect && bulanSelect) {
+if (yearSelection && monthOption) {
     isiFilterTahunBulan(); 
 }
