@@ -74,6 +74,12 @@ function openModal(element) {
         modalFooter.appendChild(thumbnail);
     }
 
+
+    // Tampilkan modal
+    const modal = new bootstrap.Modal(document.getElementById('projectModal'));
+    modal.show();
+}
+
 // js/scripts.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -89,7 +95,23 @@ const firebaseConfig = {
     measurementId: "G-732CV0099G"
   };
 
-    // Tampilkan modal
-    const modal = new bootstrap.Modal(document.getElementById('projectModal'));
-    modal.show();
-}
+// Inisialisasi Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("pengeluaranForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const tanggal = document.getElementById("tanggal").value;
+    const kategori = document.getElementById("kategori").value;
+    const jumlah = document.getElementById("jumlah").value.replace(/\./g, ""); // Hapus format ribuan
+    const deskripsi = document.getElementById("deskripsi").value;
+
+    try {
+        await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
+        Swal.fire("Sukses", "Data berhasil disimpan", "success");
+        document.getElementById("pengeluaranForm").reset();
+    } catch (error) {
+        Swal.fire("Error", "Gagal menyimpan data", "error");
+    }
+});
