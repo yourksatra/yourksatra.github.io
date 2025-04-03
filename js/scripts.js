@@ -51,7 +51,6 @@ async function isiFilterTahunBulan() {
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
-    console.log(pengeluaranRef);
     
     let tahunSet = new Set();
     let bulanSet = new Set();
@@ -61,9 +60,6 @@ async function isiFilterTahunBulan() {
         tahunSet.add(tahun);
         bulanSet.add(bulan);
     });
-
-    console.log("Tahun tersedia:", tahunSet);
-    console.log("Bulan tersedia:", bulanSet);
 
     // Isi dropdown Tahun
     tahunSelect.innerHTML = '<option disabled selected>Pilih Tahun</option>';
@@ -91,6 +87,8 @@ async function tampilkanData() {
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
+    console.log(pengeluaranRef);
+    console.log(snapshot);
     dataTabel.innerHTML = "";
     let total = 0;
 
