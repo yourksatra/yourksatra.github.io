@@ -34,6 +34,108 @@ document.getElementById("pengeluaranForm").addEventListener("submit", async func
     }
 });
 
+// Ambil elemen filter & tabel
+const tahunSelect = document.getElementById("tahun");
+const bulanSelect = document.getElementById("bulan");
+const dataTabel = document.getElementById("dataTabel");
+const totalPengeluaran = document.getElementById("totalPengeluaran");
+const downloadCSV = document.getElementById("downloadCSV");
+
+// Fungsi untuk mendapatkan tahun & bulan unik dari database
+function isiFilterTahunBulan() {
+    const pengeluaranRef = ref(db, "pengeluaran");
+    onValue(pengeluaranRef, (snapshot) => {
+        const data = snapshot.val();
+        let tahunSet = new Set();
+        let bulanSet = new Set();
+
+        if (data) {
+            Object.values(data).forEach(entry => {
+                let [tahun, bulan] = entry.tanggal.split("-"); 
+                tahunSet.add(tahun);
+                bulanSet.add(bulan);
+            });
+
+            // Isi Select Tahun
+            tahunSelect.innerHTML = '<option disable selected>Pilih Tahun</option>';
+            tahunSet.forEach(tahun => {
+                tahunSelect.innerHTML += `<option value="${tahun}">${tahun}</option>`;
+            });
+
+            // Isi Select Bulan
+            bulanSelect.innerHTML = '<option disable selected>Pilih Bulan</option>';
+            const bulanNama = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            bulanSet.forEach(bulan => {
+                bulanSelect.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
+            });
+        }
+    });
+}
+
+// Fungsi untuk menampilkan data sesuai tahun & bulan
+function tampilkanData() {
+    const tahun = tahunSelect.value;
+    const bulan = bulanSelect.value;
+    if (!tahun || !bulan) return;
+
+    const pengeluaranRef = ref(db, "pengeluaran");
+    onValue(pengeluaranRef, (snapshot) => {
+        dataTabel.innerHTML = "";
+        let total = 0;
+        const data = snapshot.val();
+
+        if (data) {
+            Object.values(data).forEach(entry => {
+                let [entryTahun, entryBulan] = entry.tanggal.split("-");
+                if (entryTahun === tahun && entryBulan === bulan) {
+                    total += parseInt(entry.jumlah.replace(/\D/g, ""));
+                    dataTabel.innerHTML += `
+                        <tr>
+                            <td>${entry.tanggal}</td>
+                            <td>${entry.deskripsi}</td>
+                            <td>Rp ${new Intl.NumberFormat("id-ID").format(entry.jumlah)}</td>
+                            <td>${entry.kategori}</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            totalPengeluaran.textContent = `Rp ${new Intl.NumberFormat("id-ID").format(total)}`;
+        }
+    });
+}
+
+// Fungsi Download CSV
+function downloadCSVFile() {
+    let csv = "Tanggal,Deskripsi,Jumlah,Kategori\n";
+    const rows = dataTabel.querySelectorAll("tr");
+
+    rows.forEach(row => {
+        let cols = row.querySelectorAll("td");
+        let rowData = [];
+        cols.forEach(col => rowData.push(col.innerText));
+        csv += rowData.join(",") + "\n";
+    });
+
+    // Tambahkan total di akhir file CSV
+    csv += `Total,,${totalPengeluaran.textContent},\n`;
+
+    // Buat link download
+    let hiddenElement = document.createElement("a");
+    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
+    hiddenElement.target = "_blank";
+    hiddenElement.download = `Pengeluaran_${tahunSelect.value}_${bulanSelect.value}.csv`;
+    hiddenElement.click();
+}
+
+// Event Listener
+tahunSelect.addEventListener("change", tampilkanData);
+bulanSelect.addEventListener("change", tampilkanData);
+downloadCSV.addEventListener("click", downloadCSVFile);
+
+// Inisialisasi
+isiFilterTahunBulan();
+
 let slideIndex = 1;
 let slideTimeout;
 showSlides(slideIndex);
