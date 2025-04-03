@@ -1,3 +1,11 @@
+// ** Ambil elemen DOM dengan pengecekan null **
+const form = document.getElementById("pengeluaranForm");
+const bulanSelect = document.getElementById("bulan");
+const tahunSelect = document.getElementById("tahun");
+const dataTabel = document.getElementById("dataTabel");
+const totalPengeluaran = document.getElementById("totalPengeluaran");
+const downloadCSV = document.getElementById("downloadCSV");
+
 // js/scripts.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -16,14 +24,6 @@ const firebaseConfig = {
 // Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// ** Ambil elemen DOM dengan pengecekan null **
-const form = document.getElementById("pengeluaranForm");
-let tahunSelect = document.getElementById("tahun");
-let bulanSelect = document.getElementById("bulan");
-const dataTabel = document.getElementById("dataTabel");
-const totalPengeluaran = document.getElementById("totalPengeluaran");
-const downloadCSV = document.getElementById("downloadCSV");
 
 // ** 1. Menyimpan Data ke Firestore **
 if (form) {
