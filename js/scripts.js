@@ -76,7 +76,6 @@ async function isiFilterTahunBulan() {
 }
 
 // ** 3. Menampilkan Data yang Difilter **
-async function tampilkanData() {
     if (!tahunSelect || !bulanSelect || !dataTabel) return; // Cek elemen ada
 
     const tahun = tahunSelect.value;
@@ -121,7 +120,6 @@ async function tampilkanData() {
     }
 
     totalPengeluaran.textContent = `Rp ${new Intl.NumberFormat("id-ID").format(total)}`;
-}
 
 // ** 4. Fungsi Download CSV **
 function downloadCSVFile() {
