@@ -77,25 +77,32 @@ async function isiFilterTahunBulan() {
 
 // ** 3. Menampilkan Data yang Difilter **
 async function tampilkanData() {
-    if (!tahunSelect || !bulanSelect || !dataTabel) return; // Cek apakah elemen ada
+    if (!tahunSelect || !bulanSelect || !dataTabel) return; // Cek elemen ada
 
     const tahun = tahunSelect.value;
-    console.log(tahun);
     const bulan = bulanSelect.value;
-    console.log(bulan);
     if (!tahun || !bulan) return;
 
+    console.log("Filter dipilih:", tahun, bulan); // Debug: Lihat tahun & bulan yang dipilih
+
     const pengeluaranRef = collection(db, "pengeluaran");
-    console.log(pengeluaranRef);
     const snapshot = await getDocs(pengeluaranRef);
-    console.log(snapshot);
+    
+    console.log("Data Firestore:", snapshot.docs.map(doc => doc.data())); // Debug: Lihat data dari Firestore
+    
     dataTabel.innerHTML = "";
     let total = 0;
+    let dataDitemukan = false; // Flag jika data ditemukan
 
     snapshot.forEach((doc) => {
         let data = doc.data();
+        if (!data.tanggal) return; // Pastikan tanggal ada
+        
         let [entryTahun, entryBulan] = data.tanggal.split("-");
+        console.log(`Cek: ${data.tanggal} -> Tahun: ${entryTahun}, Bulan: ${entryBulan}`); // Debug: Bandingkan dengan filter
+
         if (entryTahun === tahun && entryBulan === bulan) {
+            dataDitemukan = true;
             total += parseInt(data.jumlah.replace(/\D/g, ""));
             dataTabel.innerHTML += `
                 <tr>
@@ -107,6 +114,11 @@ async function tampilkanData() {
             `;
         }
     });
+
+    // Jika tidak ada data yang cocok
+    if (!dataDitemukan) {
+        dataTabel.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Tidak ada data</td></tr>`;
+    }
 
     totalPengeluaran.textContent = `Rp ${new Intl.NumberFormat("id-ID").format(total)}`;
 }
