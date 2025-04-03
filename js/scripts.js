@@ -73,8 +73,6 @@ async function isiFilterTahunBulan() {
     bulanSet.forEach((bulan) => {
         bulanSelect.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
     });
-
-    console.log("Dropdown Tahun & Bulan telah terisi.");
 }
 
 // ** 3. Menampilkan Data yang Difilter **
@@ -82,12 +80,14 @@ async function tampilkanData() {
     if (!tahunSelect || !bulanSelect || !dataTabel) return; // Cek apakah elemen ada
 
     const tahun = tahunSelect.value;
+    console.log(tahun);
     const bulan = bulanSelect.value;
+    console.log(bulan);
     if (!tahun || !bulan) return;
 
     const pengeluaranRef = collection(db, "pengeluaran");
-    const snapshot = await getDocs(pengeluaranRef);
     console.log(pengeluaranRef);
+    const snapshot = await getDocs(pengeluaranRef);
     console.log(snapshot);
     dataTabel.innerHTML = "";
     let total = 0;
