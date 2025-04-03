@@ -44,7 +44,12 @@
     
     <a href="https://yourksatra.github.io/moneynote" class="btn btn-secondary">Kembali</a>
     <button id="downloadCSV" class="btn btn-success">Download CSV</button>
-    
-    <script src="js/scripts.js" type="module"></script>
 </body>
+<script src="js/scripts.js" type="module"></script>
+<script type="module">
+    document.addEventListener("DOMContentLoaded", function() {
+        tahunSelect.addEventListener("change", tampilkanData);
+        bulanSelect.addEventListener("change", tampilkanData);
+    });
+</script>
 </html>
