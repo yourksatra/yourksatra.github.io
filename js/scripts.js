@@ -51,6 +51,7 @@ async function isiFilterTahunBulan() {
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
+    console.log(pengeluaranRef);
     
     let tahunSet = new Set();
     let bulanSet = new Set();
