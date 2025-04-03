@@ -150,8 +150,3 @@ if (downloadCSV) {
 if (tahunSelect && bulanSelect) {
     isiFilterTahunBulan(); 
 }
-    
-    // Tampilkan modal
-    const modal = new bootstrap.Modal(document.getElementById('projectModal'));
-    modal.show();
-}
