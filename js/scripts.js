@@ -1,7 +1,7 @@
 // ** Ambil elemen DOM dengan pengecekan null **
 const form = document.getElementById("pengeluaranForm");
-const bulanSelect = document.getElementById("bulan");
-const tahunSelect = document.getElementById("tahun");
+const yearSelection = document.getElementById("tahun");
+const monthOption = document.getElementById("bulan");
 const dataTabel = document.getElementById("dataTabel");
 const totalPengeluaran = document.getElementById("totalPengeluaran");
 const downloadCSV = document.getElementById("downloadCSV");
@@ -47,7 +47,7 @@ if (form) {
 
 // ** 2. Mengisi Filter Tahun & Bulan dari Firestore **
 async function isiFilterTahunBulan() {
-    if (!tahunSelect || !bulanSelect) return; // Cek apakah elemen ada
+    if (!yearSelection || !monthOption) return; // Cek apakah elemen ada
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
@@ -62,22 +62,22 @@ async function isiFilterTahunBulan() {
     });
 
     // Isi dropdown Tahun
-    tahunSelect.innerHTML = '<option disabled selected>Pilih Tahun</option>';
+    yearSelection.innerHTML = '<option disabled selected>Pilih Tahun</option>';
     tahunSet.forEach((tahun) => {
-        tahunSelect.innerHTML += `<option value="${tahun}">${tahun}</option>`;
+        yearSelection.innerHTML += `<option value="${tahun}">${tahun}</option>`;
     });
 
     // Isi dropdown Bulan
-    bulanSelect.innerHTML = '<option disabled selected>Pilih Bulan</option>';
+    monthOption.innerHTML = '<option disabled selected>Pilih Bulan</option>';
     const bulanNama = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     bulanSet.forEach((bulan) => {
-        bulanSelect.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
+        montOption.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
     });
 }
 
 // ** 3. Menampilkan Data yang Difilter **
    async function tampilkanData() {
-    if (!tahunSelect || !bulanSelect || !dataTabel) return; // Cek elemen ada
+    if (!yearSelection || !monthOption || !dataTabel) return; // Cek elemen ada
 
     const tahun = tahunSelect.value;
     const bulan = bulanSelect.value;
@@ -149,9 +149,9 @@ function downloadCSVFile() {
 }
 
 // ** 5. Event Listener dengan Pengecekan Elemen **
-if (tahunSelect && bulanSelect) {
-    tahunSelect.addEventListener("change", tampilkanData);
-    bulanSelect.addEventListener("change", tampilkanData);
+if (yearSelection && monthOption) {
+    yearSelection.addEventListener("change", tampilkanData);
+    monthOption.addEventListener("change", tampilkanData);
 }
 if (downloadCSV) {
     downloadCSV.addEventListener("click", downloadCSVFile);
