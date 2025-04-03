@@ -9,16 +9,13 @@
 </head>
 <body class="container py-4">
     <h2>Data Pengeluaran</h2>
-    
     <!-- Filter Tahun & Bulan -->
     <div class="d-flex gap-2 mb-3">
         <select id="tahun" class="form-select w-auto">
-            <option value="2025">2025</option>
-            <option value="2024">2024</option>
+            <option disabled selected>Pilih Tahun</option>
         </select>
         <select id="bulan" class="form-select w-auto">
-            <option value="01">Januari</option>
-            <option value="02">Februari</option>
+            <option disabled selected>Pilih Bulan</option>
         </select>
     </div>
     
@@ -45,8 +42,8 @@
         </tfoot>
     </table>
     
-    <button id="btnDownload" class="btn btn-success">Download CSV</button>
     <a href="https://yourksatra.github.io/moneynote" class="btn btn-secondary">Kembali</a>
+    <button id="btnDownload" class="btn btn-success">Download CSV</button>
     
     <script src="js/scripts.js" type="module"></script>
     <script>
