@@ -1,6 +1,6 @@
 // js/scripts.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 // Tambahkan konfigurasi Firebase di sini
 const firebaseConfig = {
@@ -16,6 +16,7 @@ const firebaseConfig = {
 // Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const dbdata = getDatabase(app);
 
 document.getElementById("pengeluaranForm").addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -43,7 +44,7 @@ const downloadCSV = document.getElementById("downloadCSV");
 
 // Fungsi untuk mendapatkan tahun & bulan unik dari database
 function isiFilterTahunBulan() {
-    const pengeluaranRef = ref(db, "pengeluaran");
+    const pengeluaranRef = ref(dbdata, "pengeluaran");
     onValue(pengeluaranRef, (snapshot) => {
         const data = snapshot.val();
         let tahunSet = new Set();
@@ -78,7 +79,7 @@ function tampilkanData() {
     const bulan = bulanSelect.value;
     if (!tahun || !bulan) return;
 
-    const pengeluaranRef = ref(db, "pengeluaran");
+    const pengeluaranRef = ref(dbdata, "pengeluaran");
     onValue(pengeluaranRef, (snapshot) => {
         dataTabel.innerHTML = "";
         let total = 0;
