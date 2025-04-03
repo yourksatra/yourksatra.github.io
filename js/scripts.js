@@ -25,22 +25,25 @@ const dataTabel = document.getElementById("dataTabel");
 const totalPengeluaran = document.getElementById("totalPengeluaran");
 const downloadCSV = document.getElementById("downloadCSV");
 
-document.getElementById("pengeluaranForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
+// ** 1. Menyimpan Data ke Firestore **
+if (form) {
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    const tanggal = document.getElementById("tanggal").value;
-    const kategori = document.getElementById("kategori").value;
-    const jumlah = document.getElementById("jumlah").value.replace(/\./g, ""); // Hapus format ribuan
-    const deskripsi = document.getElementById("deskripsi").value;
+        const tanggal = document.getElementById("tanggal").value;
+        const kategori = document.getElementById("kategori").value;
+        const jumlah = document.getElementById("jumlah").value.replace(/\./g, ""); // Hapus format ribuan
+        const deskripsi = document.getElementById("deskripsi").value;
 
-    try {
-        await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
-        Swal.fire("Sukses", "Data berhasil disimpan", "success");
-        document.getElementById("pengeluaranForm").reset();
-    } catch (error) {
-        Swal.fire("Error", "Gagal menyimpan data", "error");
-    }
-});
+        try {
+            await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
+            Swal.fire("Sukses", "Data berhasil disimpan", "success");
+            form.reset();
+        } catch (error) {
+            Swal.fire("Error", "Gagal menyimpan data", "error");
+        }
+    });
+}
 
 // ** 2. Mengisi Filter Tahun & Bulan dari Firestore **
 async function isiFilterTahunBulan() {
