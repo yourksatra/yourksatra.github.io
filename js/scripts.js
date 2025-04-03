@@ -1,16 +1,16 @@
-// ** Ambil elemen DOM dengan pengecekan null **
+// Ambil elemen DOM
 const form = document.getElementById("pengeluaranForm");
 const yearSelection = document.getElementById("tahun");
 const monthOption = document.getElementById("bulan");
-const dataTabel = document.getElementById("dataTabel");
-const totalPengeluaran = document.getElementById("totalPengeluaran");
+const dataTabel = document.getElementById("tabel-body");
+const totalPengeluaran = document.getElementById("total-pengeluaran");
 const downloadCSV = document.getElementById("downloadCSV");
 
-// js/scripts.js
+// Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-// Tambahkan konfigurasi Firebase di sini
+// konfigurasi Firebase 
 const firebaseConfig = {
     apiKey: "AIzaSyAIN63oj7OWScZ5kV0G7MxQL1bq3rgGcF0",
     authDomain: "webmoneynote.firebaseapp.com",
@@ -47,7 +47,7 @@ if (form) {
 
 // ** 2. Mengisi Filter Tahun & Bulan dari Firestore **
 async function isiFilterTahunBulan() {
-    if (!yearSelection || !monthOption) return; // Cek apakah elemen ada
+    if (!yearSelection || !monthOption) return;
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
@@ -71,35 +71,35 @@ async function isiFilterTahunBulan() {
     monthOption.innerHTML = '<option disabled selected>Pilih Bulan</option>';
     const bulanNama = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     bulanSet.forEach((bulan) => {
-        montOption.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
+        monthOption.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
     });
 }
 
 // ** 3. Menampilkan Data yang Difilter **
-   async function tampilkanData() {
-    if (!yearSelection || !monthOption || !dataTabel) return; // Cek elemen ada
+async function tampilkanData() {
+    if (!yearSelection || !monthOption || !dataTabel) return;
 
-    const tahun = tahunSelect.value;
-    const bulan = bulanSelect.value;
+    const tahun = yearSelection.value;
+    const bulan = monthOption.value;
     if (!tahun || !bulan) return;
 
-    console.log("Filter dipilih:", tahun, bulan); // Debug: Lihat tahun & bulan yang dipilih
+    console.log("Filter dipilih:", tahun, bulan); 
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
     
-    console.log("Data Firestore:", snapshot.docs.map(doc => doc.data())); // Debug: Lihat data dari Firestore
-    
+    console.log("Data Firestore:", snapshot.docs.map(doc => doc.data()));
+
     dataTabel.innerHTML = "";
     let total = 0;
-    let dataDitemukan = false; // Flag jika data ditemukan
+    let dataDitemukan = false;
 
     snapshot.forEach((doc) => {
         let data = doc.data();
-        if (!data.tanggal) return; // Pastikan tanggal ada
+        if (!data.tanggal) return;
         
         let [entryTahun, entryBulan] = data.tanggal.split("-");
-        console.log(`Cek: ${data.tanggal} -> Tahun: ${entryTahun}, Bulan: ${entryBulan}`); // Debug: Bandingkan dengan filter
+        console.log(`Cek: ${data.tanggal} -> Tahun: ${entryTahun}, Bulan: ${entryBulan}`);
 
         if (entryTahun === tahun && entryBulan === bulan) {
             dataDitemukan = true;
@@ -107,15 +107,14 @@ async function isiFilterTahunBulan() {
             dataTabel.innerHTML += `
                 <tr>
                     <td>${data.tanggal}</td>
+                    <td>${data.kategori}</td>
                     <td>${data.deskripsi}</td>
                     <td>Rp ${new Intl.NumberFormat("id-ID").format(data.jumlah)}</td>
-                    <td>${data.kategori}</td>
                 </tr>
             `;
         }
     });
 
-    // Jika tidak ada data yang cocok
     if (!dataDitemukan) {
         dataTabel.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Tidak ada data</td></tr>`;
     }
@@ -125,9 +124,9 @@ async function isiFilterTahunBulan() {
 
 // ** 4. Fungsi Download CSV **
 function downloadCSVFile() {
-    if (!dataTabel || !totalPengeluaran) return; // Cek apakah elemen ada
+    if (!dataTabel || !totalPengeluaran) return;
 
-    let csv = "Tanggal,Deskripsi,Jumlah,Kategori\n";
+    let csv = "Tanggal,Kategori,Deskripsi,Jumlah\n";
     const rows = dataTabel.querySelectorAll("tr");
 
     rows.forEach((row) => {
@@ -137,19 +136,18 @@ function downloadCSVFile() {
         csv += rowData.join(",") + "\n";
     });
 
-    // Tambahkan total di akhir file CSV
     csv += `Total,,${totalPengeluaran.textContent},\n`;
 
-    // Buat link download
     let hiddenElement = document.createElement("a");
     hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
     hiddenElement.target = "_blank";
-    hiddenElement.download = `Pengeluaran_${tahunSelect.value}_${bulanSelect.value}.csv`;
+    hiddenElement.download = `Pengeluaran_${yearSelection.value}_${monthOption.value}.csv`;
     hiddenElement.click();
 }
 
 // ** 5. Event Listener dengan Pengecekan Elemen **
 document.addEventListener("DOMContentLoaded", function() {
+    isiFilterTahunBulan();
     if (yearSelection && monthOption) {
         yearSelection.addEventListener("change", tampilkanData);
         monthOption.addEventListener("change", tampilkanData);
@@ -158,8 +156,3 @@ document.addEventListener("DOMContentLoaded", function() {
         downloadCSV.addEventListener("click", downloadCSVFile);
     }
 });
-
-// ** Panggil fungsi hanya jika elemen ada **
-if (yearSelection && monthOption) {
-    isiFilterTahunBulan(); 
-}
