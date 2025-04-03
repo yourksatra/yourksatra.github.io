@@ -149,13 +149,15 @@ function downloadCSVFile() {
 }
 
 // ** 5. Event Listener dengan Pengecekan Elemen **
-if (yearSelection && monthOption) {
-    yearSelection.addEventListener("change", tampilkanData);
-    monthOption.addEventListener("change", tampilkanData);
-}
-if (downloadCSV) {
-    downloadCSV.addEventListener("click", downloadCSVFile);
-}
+document.addEventListener("DOMContentLoaded", function() {
+    if (yearSelection && monthOption) {
+        yearSelection.addEventListener("change", tampilkanData);
+        monthOption.addEventListener("change", tampilkanData);
+    }
+    if (downloadCSV) {
+        downloadCSV.addEventListener("click", downloadCSVFile);
+    }
+});
 
 // ** Panggil fungsi hanya jika elemen ada **
 if (tahunSelect && bulanSelect) {
