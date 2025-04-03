@@ -149,8 +149,6 @@ function downloadCSVFile() {
 }
 
 // ** 5. Event Listener dengan Pengecekan Elemen **
-console.log("Elemen Tahun:", tahunSelect);
-console.log("Elemen Bulan:", bulanSelect);
 if (tahunSelect && bulanSelect) {
     tahunSelect.addEventListener("change", tampilkanData);
     bulanSelect.addEventListener("change", tampilkanData);
