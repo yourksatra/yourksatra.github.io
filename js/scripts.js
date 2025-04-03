@@ -19,8 +19,8 @@ const db = getFirestore(app);
 
 // ** Ambil elemen DOM dengan pengecekan null **
 const form = document.getElementById("pengeluaranForm");
-const tahunSelect = document.getElementById("tahun");
-const bulanSelect = document.getElementById("bulan");
+let tahunSelect = document.getElementById("tahun");
+let bulanSelect = document.getElementById("bulan");
 const dataTabel = document.getElementById("dataTabel");
 const totalPengeluaran = document.getElementById("totalPengeluaran");
 const downloadCSV = document.getElementById("downloadCSV");
