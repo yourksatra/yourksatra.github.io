@@ -46,19 +46,5 @@
     <button id="btnDownload" class="btn btn-success">Download CSV</button>
     
     <script src="js/scripts.js" type="module"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function fetchData() {
-                let tahun = document.getElementById("tahun").value;
-                let bulan = document.getElementById("bulan").value;
-                loadPengeluaran(tahun, bulan);
-            }
-            
-            document.getElementById("tahun").addEventListener("change", fetchData);
-            document.getElementById("bulan").addEventListener("change", fetchData);
-            
-            fetchData();
-        });
-    </script>
 </body>
 </html>
