@@ -47,6 +47,12 @@
 </body>
 <script src="js/scripts.js" type="module"></script>
 <script type="module">
+    const form = document.getElementById("pengeluaranForm");
+    const tahunSelect = document.getElementById("tahun");
+    const bulanSelect = document.getElementById("bulan");
+    const dataTabel = document.getElementById("dataTabel");
+    const totalPengeluaran = document.getElementById("totalPengeluaran");
+    const downloadCSV = document.getElementById("downloadCSV");
     document.addEventListener("DOMContentLoaded", function() {
         tahunSelect.addEventListener("change", tampilkanData);
         bulanSelect.addEventListener("change", tampilkanData);
