@@ -1,3 +1,39 @@
+// js/scripts.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+// Tambahkan konfigurasi Firebase di sini
+const firebaseConfig = {
+    apiKey: "AIzaSyAIN63oj7OWScZ5kV0G7MxQL1bq3rgGcF0",
+    authDomain: "webmoneynote.firebaseapp.com",
+    projectId: "webmoneynote",
+    storageBucket: "webmoneynote.firebasestorage.app",
+    messagingSenderId: "916249252817",
+    appId: "1:916249252817:web:7359ed42699da26e60c6f0",
+    measurementId: "G-732CV0099G"
+  };
+
+// Inisialisasi Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("pengeluaranForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const tanggal = document.getElementById("tanggal").value;
+    const kategori = document.getElementById("kategori").value;
+    const jumlah = document.getElementById("jumlah").value.replace(/\./g, ""); // Hapus format ribuan
+    const deskripsi = document.getElementById("deskripsi").value;
+
+    try {
+        await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
+        Swal.fire("Sukses", "Data berhasil disimpan", "success");
+        document.getElementById("pengeluaranForm").reset();
+    } catch (error) {
+        Swal.fire("Error", "Gagal menyimpan data", "error");
+    }
+});
+
 let slideIndex = 1;
 let slideTimeout;
 showSlides(slideIndex);
@@ -73,8 +109,7 @@ function openModal(element) {
         };
         modalFooter.appendChild(thumbnail);
     }
-
-
+    
     // Tampilkan modal
     const modal = new bootstrap.Modal(document.getElementById('projectModal'));
     modal.show();
