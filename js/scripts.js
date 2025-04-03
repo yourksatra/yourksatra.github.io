@@ -1,3 +1,7 @@
+let slideIndex = 1;
+let slideTimeout;
+showSlides(slideIndex);
+
 // js/scripts.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -17,7 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Ambil elemen form & tabel
+// ** Ambil elemen DOM dengan pengecekan null **
 const form = document.getElementById("pengeluaranForm");
 const tahunSelect = document.getElementById("tahun");
 const bulanSelect = document.getElementById("bulan");
@@ -47,8 +51,11 @@ if (form) {
 
 // ** 2. Mengisi Filter Tahun & Bulan dari Firestore **
 async function isiFilterTahunBulan() {
+    if (!tahunSelect || !bulanSelect) return; // Cek apakah elemen ada
+
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
+    
     let tahunSet = new Set();
     let bulanSet = new Set();
 
@@ -57,6 +64,9 @@ async function isiFilterTahunBulan() {
         tahunSet.add(tahun);
         bulanSet.add(bulan);
     });
+
+    console.log("Tahun tersedia:", tahunSet);
+    console.log("Bulan tersedia:", bulanSet);
 
     // Isi dropdown Tahun
     tahunSelect.innerHTML = '<option disabled selected>Pilih Tahun</option>';
@@ -70,10 +80,14 @@ async function isiFilterTahunBulan() {
     bulanSet.forEach((bulan) => {
         bulanSelect.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
     });
+
+    console.log("Dropdown Tahun & Bulan telah terisi.");
 }
 
 // ** 3. Menampilkan Data yang Difilter **
 async function tampilkanData() {
+    if (!tahunSelect || !bulanSelect || !dataTabel) return; // Cek apakah elemen ada
+
     const tahun = tahunSelect.value;
     const bulan = bulanSelect.value;
     if (!tahun || !bulan) return;
@@ -104,6 +118,8 @@ async function tampilkanData() {
 
 // ** 4. Fungsi Download CSV **
 function downloadCSVFile() {
+    if (!dataTabel || !totalPengeluaran) return; // Cek apakah elemen ada
+
     let csv = "Tanggal,Deskripsi,Jumlah,Kategori\n";
     const rows = dataTabel.querySelectorAll("tr");
 
@@ -125,17 +141,19 @@ function downloadCSVFile() {
     hiddenElement.click();
 }
 
-// ** 5. Event Listener **
+// ** 5. Event Listener dengan Pengecekan Elemen **
 if (tahunSelect && bulanSelect) {
     tahunSelect.addEventListener("change", tampilkanData);
     bulanSelect.addEventListener("change", tampilkanData);
+}
+if (downloadCSV) {
     downloadCSV.addEventListener("click", downloadCSVFile);
-    isiFilterTahunBulan(); // Panggil fungsi untuk isi dropdown saat halaman dimuat
 }
 
-let slideIndex = 1;
-let slideTimeout;
-showSlides(slideIndex);
+// ** Panggil fungsi hanya jika elemen ada **
+if (tahunSelect && bulanSelect) {
+    isiFilterTahunBulan(); 
+}
 
 // Fungsi untuk mengganti slide dengan tombol
 function plusSlides(n) {
