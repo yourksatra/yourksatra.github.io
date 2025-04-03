@@ -24,8 +24,8 @@
             </div>
         <input type="text" id="jumlah" class="form-control mb-2" placeholder="Jumlah (Rp)" required>
         <textarea id="deskripsi" class="form-control mb-2" placeholder="Deskripsi"></textarea>
-        <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="reset" class="btn btn-warning">Reset</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
         <a type="button" href="https://yourksatra.github.io/moneytabel" class="btn btn-secondary">Lihat Data</a>
     </form>
     <script src="js/scripts.js" type="module"></script>
@@ -45,27 +45,6 @@
                 kategoriManual.value = "";
             }
         }
-        
-        // Inisialisasi Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
-        document.getElementById("pengeluaranForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-        
-            const tanggal = document.getElementById("tanggal").value;
-            const kategori = document.getElementById("kategori").value;
-            const jumlah = document.getElementById("jumlah").value.replace(/\./g, ""); // Hapus format ribuan
-            const deskripsi = document.getElementById("deskripsi").value;
-        
-            try {
-                await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
-                Swal.fire("Sukses", "Data berhasil disimpan", "success");
-                document.getElementById("pengeluaranForm").reset();
-            } catch (error) {
-                Swal.fire("Error", "Gagal menyimpan data", "error");
-            }
-        });
     </script>
 </body>
 </html>
