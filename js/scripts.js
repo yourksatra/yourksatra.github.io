@@ -1,6 +1,6 @@
 // js/scripts.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 // Tambahkan konfigurasi Firebase di sini
 const firebaseConfig = {
@@ -16,7 +16,14 @@ const firebaseConfig = {
 // Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const dbdata = getDatabase(app);
+
+// Ambil elemen form & tabel
+const form = document.getElementById("pengeluaranForm");
+const tahunSelect = document.getElementById("tahun");
+const bulanSelect = document.getElementById("bulan");
+const dataTabel = document.getElementById("dataTabel");
+const totalPengeluaran = document.getElementById("totalPengeluaran");
+const downloadCSV = document.getElementById("downloadCSV");
 
 document.getElementById("pengeluaranForm").addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -35,86 +42,72 @@ document.getElementById("pengeluaranForm").addEventListener("submit", async func
     }
 });
 
-// Ambil elemen filter & tabel
-const tahunSelect = document.getElementById("tahun");
-const bulanSelect = document.getElementById("bulan");
-const dataTabel = document.getElementById("dataTabel");
-const totalPengeluaran = document.getElementById("totalPengeluaran");
-const downloadCSV = document.getElementById("downloadCSV");
+// ** 2. Mengisi Filter Tahun & Bulan dari Firestore **
+async function isiFilterTahunBulan() {
+    const pengeluaranRef = collection(db, "pengeluaran");
+    const snapshot = await getDocs(pengeluaranRef);
+    let tahunSet = new Set();
+    let bulanSet = new Set();
 
-// Fungsi untuk mendapatkan tahun & bulan unik dari database
-function isiFilterTahunBulan() {
-    const pengeluaranRef = ref(dbdata, "pengeluaran");
-    onValue(pengeluaranRef, (snapshot) => {
-        const data = snapshot.val();
-        let tahunSet = new Set();
-        let bulanSet = new Set();
+    snapshot.forEach((doc) => {
+        let [tahun, bulan] = doc.data().tanggal.split("-");
+        tahunSet.add(tahun);
+        bulanSet.add(bulan);
+    });
 
-        if (data) {
-            Object.values(data).forEach(entry => {
-                let [tahun, bulan] = entry.tanggal.split("-"); 
-                tahunSet.add(tahun);
-                bulanSet.add(bulan);
-            });
+    // Isi dropdown Tahun
+    tahunSelect.innerHTML = '<option disabled selected>Pilih Tahun</option>';
+    tahunSet.forEach((tahun) => {
+        tahunSelect.innerHTML += `<option value="${tahun}">${tahun}</option>`;
+    });
 
-            // Isi Select Tahun
-            tahunSelect.innerHTML = '<option disable selected>Pilih Tahun</option>';
-            tahunSet.forEach(tahun => {
-                tahunSelect.innerHTML += `<option value="${tahun}">${tahun}</option>`;
-            });
-
-            // Isi Select Bulan
-            bulanSelect.innerHTML = '<option disable selected>Pilih Bulan</option>';
-            const bulanNama = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-            bulanSet.forEach(bulan => {
-                bulanSelect.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
-            });
-        }
+    // Isi dropdown Bulan
+    bulanSelect.innerHTML = '<option disabled selected>Pilih Bulan</option>';
+    const bulanNama = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    bulanSet.forEach((bulan) => {
+        bulanSelect.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
     });
 }
 
-// Fungsi untuk menampilkan data sesuai tahun & bulan
-function tampilkanData() {
+// ** 3. Menampilkan Data yang Difilter **
+async function tampilkanData() {
     const tahun = tahunSelect.value;
     const bulan = bulanSelect.value;
     if (!tahun || !bulan) return;
 
-    const pengeluaranRef = ref(dbdata, "pengeluaran");
-    onValue(pengeluaranRef, (snapshot) => {
-        dataTabel.innerHTML = "";
-        let total = 0;
-        const data = snapshot.val();
+    const pengeluaranRef = collection(db, "pengeluaran");
+    const snapshot = await getDocs(pengeluaranRef);
+    dataTabel.innerHTML = "";
+    let total = 0;
 
-        if (data) {
-            Object.values(data).forEach(entry => {
-                let [entryTahun, entryBulan] = entry.tanggal.split("-");
-                if (entryTahun === tahun && entryBulan === bulan) {
-                    total += parseInt(entry.jumlah.replace(/\D/g, ""));
-                    dataTabel.innerHTML += `
-                        <tr>
-                            <td>${entry.tanggal}</td>
-                            <td>${entry.deskripsi}</td>
-                            <td>Rp ${new Intl.NumberFormat("id-ID").format(entry.jumlah)}</td>
-                            <td>${entry.kategori}</td>
-                        </tr>
-                    `;
-                }
-            });
-
-            totalPengeluaran.textContent = `Rp ${new Intl.NumberFormat("id-ID").format(total)}`;
+    snapshot.forEach((doc) => {
+        let data = doc.data();
+        let [entryTahun, entryBulan] = data.tanggal.split("-");
+        if (entryTahun === tahun && entryBulan === bulan) {
+            total += parseInt(data.jumlah.replace(/\D/g, ""));
+            dataTabel.innerHTML += `
+                <tr>
+                    <td>${data.tanggal}</td>
+                    <td>${data.deskripsi}</td>
+                    <td>Rp ${new Intl.NumberFormat("id-ID").format(data.jumlah)}</td>
+                    <td>${data.kategori}</td>
+                </tr>
+            `;
         }
     });
+
+    totalPengeluaran.textContent = `Rp ${new Intl.NumberFormat("id-ID").format(total)}`;
 }
 
-// Fungsi Download CSV
+// ** 4. Fungsi Download CSV **
 function downloadCSVFile() {
     let csv = "Tanggal,Deskripsi,Jumlah,Kategori\n";
     const rows = dataTabel.querySelectorAll("tr");
 
-    rows.forEach(row => {
+    rows.forEach((row) => {
         let cols = row.querySelectorAll("td");
         let rowData = [];
-        cols.forEach(col => rowData.push(col.innerText));
+        cols.forEach((col) => rowData.push(col.innerText));
         csv += rowData.join(",") + "\n";
     });
 
@@ -129,13 +122,13 @@ function downloadCSVFile() {
     hiddenElement.click();
 }
 
-// Event Listener
-tahunSelect.addEventListener("change", tampilkanData);
-bulanSelect.addEventListener("change", tampilkanData);
-downloadCSV.addEventListener("click", downloadCSVFile);
-
-// Inisialisasi
-isiFilterTahunBulan();
+// ** 5. Event Listener **
+if (tahunSelect && bulanSelect) {
+    tahunSelect.addEventListener("change", tampilkanData);
+    bulanSelect.addEventListener("change", tampilkanData);
+    downloadCSV.addEventListener("click", downloadCSVFile);
+    isiFilterTahunBulan(); // Panggil fungsi untuk isi dropdown saat halaman dimuat
+}
 
 let slideIndex = 1;
 let slideTimeout;
