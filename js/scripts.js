@@ -71,7 +71,7 @@ async function isiFilterTahunBulan() {
     // Isi dropdown Tahun
     yearSelect.innerHTML = '<option disabled selected>Pilih Tahun</option>';
     tahunSet.forEach((tahun) => {
-        yearSelection.innerHTML += `<option value="${tahun}">${tahun}</option>`;
+        yearSelect.innerHTML += `<option value="${tahun}">${tahun}</option>`;
     });
 
     // Isi dropdown Bulan
