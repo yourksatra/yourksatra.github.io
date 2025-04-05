@@ -84,7 +84,6 @@ async function isiFilterTahunBulan() {
 }
 
 // ** 3. Menampilkan Data yang Difilter **
-// ** Menampilkan Data yang Difilter **
 async function tampilkanData() {
     if (!yearSelect || !monthSelect || !tableBody) return;
     const tahun = yearSelect.value;
@@ -117,37 +116,45 @@ async function tampilkanData() {
         }
     });
 
-    // 🔍 Debug: Pastikan data masuk
-    console.log("Data yang akan ditampilkan:", allData);
 
     // ** Tampilkan tabel utama **
-    if (allData.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="4" class="text-center">Tidak ada data</td></tr>`;
+    tableBody.innerHTML = ""; // bersihkan dulu
+    if (allData.length > 0) {
+        allData.forEach((data) => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${data.tanggal}</td>
+                    <td>${data.kategori || "-"}</td>
+                    <td>${data.deskripsi || "-"}</td>
+                    <td>${formatRupiah(data.jumlah || 0)}</td>
+                </tr>
+            `;
+        });
+    
+        // Inisialisasi DataTable hanya jika data tersedia
+        if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
+            $('#pengeluaranTable').DataTable().destroy();
+        }
+        $('#pengeluaranTable').DataTable({
+            order: [[0, "asc"]],
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                paginate: { previous: "Sebelumnya", next: "Berikutnya" },
+                zeroRecords: "Tidak ada data ditemukan"
+            }
+        });
+    
     } else {
-        tableBody.innerHTML = allData.map(data => `
-            <tr>
-                <td>${data.tanggal}</td>
-                <td>${data.kategori || "-"}</td>
-                <td>${data.deskripsi || "-"}</td>
-                <td>${formatRupiah(data.jumlah || 0)}</td>
-            </tr>
-        `).join("");
+        // Jika data kosong, kosongkan tabel dan jangan inisialisasi DataTable
+        tableBody.innerHTML = `
+            <tr><td colspan="4" class="text-center">Silakan pilih tahun dan bulan</td></tr>
+        `;
+        if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
+            $('#pengeluaranTable').DataTable().destroy();
+        }
     }
-
-    // // ** Inisialisasi DataTable (Reset jika sudah ada) **
-    // if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
-    //     $('#pengeluaranTable').DataTable().destroy();
-    // }
-    // $('#pengeluaranTable').DataTable({
-    //     order: [[0, "asc"]],
-    //     language: {
-    //         search: "Cari:",
-    //         lengthMenu: "Tampilkan _MENU_ data per halaman",
-    //         info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-    //         paginate: { previous: "Sebelumnya", next: "Berikutnya" },
-    //         zeroRecords: "Tidak ada data ditemukan"
-    //     }
-    // });
 
     // ** Statistik Tabel **
     statistikBody.innerHTML = "";
