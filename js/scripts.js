@@ -130,10 +130,10 @@ async function tampilkanData() {
     });
 
     // Inisialisasi DataTable
-    if ($.fn.DataTable.isDataTable("#tabel-data")) {
-        $('#tabel-data').DataTable().destroy();
+    if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
+        $('#pengeluaranTable').DataTable().destroy();
     }
-    $('#tabel-data').DataTable({
+    $('#pengeluaranTable').DataTable({
         pageLength: 15,
         order: [[0, "asc"]],
         language: {
@@ -151,18 +151,24 @@ async function tampilkanData() {
         let day = i.toString().padStart(2, "0");
         let tanggal = `${tahun}-${bulan}-${day}`;
         let jumlah = statistik[tanggal] || 0;
+    
         statistikBody.innerHTML += `
             <tr>
                 <td>${tanggal}</td>
-                <td>Rp ${new Intl.NumberFormat("id-ID").format(data.jumlah)}</td>
+                <td>${formatRupiah(jumlah)}</td>
             </tr>`;
     }
-
+    
     // Update total dan rata-rata
-    totalPengeluaranEl.textContent = new Intl.NumberFormat("id-ID").format(totalPengeluaran);
+    totalPengeluaranEl.textContent = formatRupiah(totalPengeluaran);
     let rata2 = totalPengeluaran / tanggalTerakhir;
-    rataRataEl.textContent = new Intl.NumberFormat("id-ID").format(Math.round(rata2));
+    rataRataEl.textContent = formatRupiah(Math.round(rata2));
 }
+
+function formatRupiah(angka) {
+    return "Rp " + new Intl.NumberFormat("id-ID").format(angka);
+}
+
 // Event
 document.addEventListener("DOMContentLoaded", () => {
     isiFilterTahunBulan();
