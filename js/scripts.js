@@ -85,6 +85,7 @@ async function isiFilterTahunBulan() {
 
 // ** 3. Menampilkan Data yang Difilter **
 async function tampilkanData() {
+    if (!yearSelect || !monthSelect || !tableBody) return;
     const tahun = yearSelect.value;
     const bulan = monthSelect.value;
     if (!tahun || !bulan) return;
@@ -117,12 +118,13 @@ async function tampilkanData() {
     // Tampilkan tabel utama
     console.log(allData);
     allData.forEach((data) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${data.tanggal}</td>
-            <td>${data.kategori || "-"}</td>
-            <td>${data.deskripsi || "-"}</td>
-            <td>${formatRupiah(data.jumlah || 0)}</td>
+        tableBody.innerHTML = `
+            <tr>
+                <td>${data.tanggal}</td>
+                <td>${data.kategori || "-"}</td>
+                <td>${data.deskripsi || "-"}</td>
+                <td>${formatRupiah(data.jumlah || 0)}</td>
+            </tr>
         `;
         tableBody.appendChild(row);
     });
