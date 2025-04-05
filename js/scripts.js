@@ -130,11 +130,7 @@ async function tampilkanData() {
     });
 
     // Inisialisasi DataTable
-    if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
-        $('#pengeluaranTable').DataTable().destroy();
-    }
     $('#pengeluaranTable').DataTable({
-        pageLength: 15,
         order: [[0, "asc"]],
         language: {
             search: "Cari:",
