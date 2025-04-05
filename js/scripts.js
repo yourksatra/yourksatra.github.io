@@ -84,12 +84,14 @@ async function isiFilterTahunBulan() {
 }
 
 // ** 3. Menampilkan Data yang Difilter **
+// ** Menampilkan Data yang Difilter **
 async function tampilkanData() {
     if (!yearSelect || !monthSelect || !tableBody) return;
     const tahun = yearSelect.value;
     const bulan = monthSelect.value;
     if (!tahun || !bulan) return;
 
+    // Ambil data dari Firestore
     const snapshot = await getDocs(collection(db, "pengeluaran"));
     const allData = [];
     const statistik = {};
@@ -115,20 +117,24 @@ async function tampilkanData() {
         }
     });
 
-    // Tampilkan tabel utama
-    console.log(allData);
-    allData.forEach((data) => {
-        tableBody.innerHTML = `
+    // 🔍 Debug: Pastikan data masuk
+    console.log("Data yang akan ditampilkan:", allData);
+
+    // ** Tampilkan tabel utama **
+    if (allData.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4" class="text-center">Tidak ada data</td></tr>`;
+    } else {
+        tableBody.innerHTML = allData.map(data => `
             <tr>
                 <td>${data.tanggal}</td>
                 <td>${data.kategori || "-"}</td>
                 <td>${data.deskripsi || "-"}</td>
                 <td>${formatRupiah(data.jumlah || 0)}</td>
             </tr>
-        `;
-    });
+        `).join("");
+    }
 
-    // Inisialisasi DataTable
+    // ** Inisialisasi DataTable (Reset jika sudah ada) **
     if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
         $('#pengeluaranTable').DataTable().destroy();
     }
@@ -143,7 +149,7 @@ async function tampilkanData() {
         }
     });
 
-    // Statistik Tabel
+    // ** Statistik Tabel **
     statistikBody.innerHTML = "";
     for (let i = 1; i <= tanggalTerakhir; i++) {
         let day = i.toString().padStart(2, "0");
@@ -157,9 +163,9 @@ async function tampilkanData() {
             </tr>`;
     }
 
-    // Update total dan rata-rata
+    // ** Update total dan rata-rata pengeluaran **
     totalPengeluaranEl.textContent = formatRupiah(totalPengeluaran);
-    let rata2 = totalPengeluaran / tanggalTerakhir;
+    let rata2 = tanggalTerakhir > 0 ? totalPengeluaran / tanggalTerakhir : 0;
     rataRataEl.textContent = formatRupiah(Math.round(rata2));
 }
 
