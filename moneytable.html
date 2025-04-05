@@ -7,6 +7,7 @@
     <title>Data Pengeluaran</title>
     <link rel="icon" type="image/x-icon" href="assets/money.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 </head>
 <body class="container py-4">
     <h2>Data Pengeluaran</h2>
@@ -20,31 +21,47 @@
         </select>
     </div>
     
-    <!-- Tabel Pengeluaran -->
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th>Tanggal</th>
-                <th>Kategori</th>
-                <th>Deskripsi</th>
-                <th>Jumlah</th>
-            </tr>
-        </thead>
-        <tbody id="tabel-body">
-            <tr>
-                <td colspan="4">Memuat data...</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="3" class="text-end">Total:</th>
-                <th id="total-pengeluaran">Rp 0</th>
-            </tr>
-        </tfoot>
+    <!-- Tabel Data -->
+    <table id="pengeluaranTable" class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Deskripsi</th>
+          <th>Jumlah</th>
+          <th>Kategori</th>
+        </tr>
+      </thead>
+      <tbody id="tabel-body"></tbody>
+    </table>
+    
+    <!-- Tabel Statistik -->
+    <h5 class="mt-4">Tabel Statistik Bulanan</h5>
+    <table class="table table-sm table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Total Pengeluaran (Rp)</th>
+        </tr>
+      </thead>
+      <tbody id="statistik-body"></tbody>
+      <tfoot>
+        <tr>
+          <th>Total Bulan Ini</th>
+          <td id="statistik-total"></td>
+        </tr>
+        <tr>
+          <th>Rata-rata Harian</th>
+          <td id="statistik-rata"></td>
+        </tr>
+      </tfoot>
     </table>
     
     <a href="https://yourksatra.github.io/moneynote" class="btn btn-secondary">Kembali</a>
     <button id="downloadCSV" class="btn btn-success">Download CSV</button>
-</body>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 <script src="js/scripts.js" type="module"></script>
+</body>
 </html>
