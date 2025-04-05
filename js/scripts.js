@@ -115,15 +115,17 @@ async function tampilkanData() {
     });
 
     // Tampilkan tabel utama
-    console.log(data);
-    tableBody.innerHTML = allData.map(data => `
-        <tr>
+    tableBody.innerHTML = ""; // Kosongkan tabel dulu
+    allData.forEach((data) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
             <td>${data.tanggal}</td>
-            <td>${data.kategori}</td>
-            <td>${data.deskripsi}</td>
-            <td>${formatRupiah(data.jumlah)}</td>
-        </tr>
-    `).join("");
+            <td>${data.kategori || "-"}</td>
+            <td>${data.deskripsi || "-"}</td>
+            <td>${formatRupiah(data.jumlah || 0)}</td>
+        `;
+        tableBody.appendChild(row);
+    });
 
     // Inisialisasi DataTable
     if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
