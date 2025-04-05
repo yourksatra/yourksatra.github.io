@@ -130,6 +130,9 @@ async function tampilkanData() {
     });
 
     // Inisialisasi DataTable
+    if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
+        $('#pengeluaranTable').DataTable().destroy();
+    }
     $('#pengeluaranTable').DataTable({
         order: [[0, "asc"]],
         language: {
