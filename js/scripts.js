@@ -1,9 +1,11 @@
 // Ambil elemen DOM
 const form = document.getElementById("pengeluaranForm");
-const yearSelection = document.getElementById("tahun");
-const monthOption = document.getElementById("bulan");
-const dataTabel = document.getElementById("tabel-body");
-const totalPengeluaran = document.getElementById("total-pengeluaran");
+const yearSelect = document.getElementById("tahun");
+const monthSelect = document.getElementById("bulan");
+const tableBody = document.getElementById("tabel-body");
+const statistikBody = document.getElementById("statistik-body");
+const totalPengeluaranEl = document.getElementById("total-pengeluaran");
+const rataRataEl = document.getElementById("rata-rata");
 const downloadCSV = document.getElementById("downloadCSV");
 
 // Import Firebase
@@ -32,11 +34,16 @@ if (form) {
 
         const tanggal = document.getElementById("tanggal").value;
         const kategori = document.getElementById("kategori").value;
+        const kategoriManual = document.getElementById("kategoriManual").value;
         const jumlah = document.getElementById("jumlah").value.replace(/\./g, ""); // Hapus format ribuan
         const deskripsi = document.getElementById("deskripsi").value;
 
         try {
-            await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
+            if(kategori == 'custom'){
+                await addDoc(collection(db, "pengeluaran"), { tanggal, kategoriManual, jumlah, deskripsi });
+            }else{
+                await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
+            }
             Swal.fire("Sukses", "Data berhasil disimpan", "success");
             form.reset();
         } catch (error) {
@@ -76,83 +83,109 @@ async function isiFilterTahunBulan() {
 }
 
 // ** 3. Menampilkan Data yang Difilter **
+// Tampilkan Data
 async function tampilkanData() {
-    if (!yearSelection || !monthOption || !dataTabel) return;
-
-    const tahun = yearSelection.value;
-    const bulan = monthOption.value;
+    const tahun = yearSelect.value;
+    const bulan = monthSelect.value;
     if (!tahun || !bulan) return;
 
-    console.log("Filter dipilih:", tahun, bulan); 
+    const snapshot = await getDocs(collection(db, "pengeluaran"));
+    const allData = [];
+    const statistik = {};
 
-    const pengeluaranRef = collection(db, "pengeluaran");
-    const snapshot = await getDocs(pengeluaranRef);
-    
-    console.log("Data Firestore:", snapshot.docs.map(doc => doc.data()));
-
-    dataTabel.innerHTML = "";
-    let total = 0;
-    let dataDitemukan = false;
+    let totalPengeluaran = 0;
+    let tanggalTerakhir = 0;
 
     snapshot.forEach((doc) => {
-        let data = doc.data();
+        const data = doc.data();
         if (!data.tanggal) return;
-        
-        let [entryTahun, entryBulan] = data.tanggal.split("-");
-        console.log(`Cek: ${data.tanggal} -> Tahun: ${entryTahun}, Bulan: ${entryBulan}`);
+        const [y, m, d] = data.tanggal.split("-");
 
-        if (entryTahun === tahun && entryBulan === bulan) {
-            dataDitemukan = true;
-            total += parseInt(data.jumlah.replace(/\D/g, ""));
-            dataTabel.innerHTML += `
-                <tr>
-                    <td>${data.tanggal}</td>
-                    <td>${data.kategori}</td>
-                    <td>${data.deskripsi}</td>
-                    <td>Rp ${new Intl.NumberFormat("id-ID").format(data.jumlah)}</td>
-                </tr>
-            `;
+        if (y === tahun && m === bulan) {
+            const tanggalKey = `${y}-${m}-${d}`;
+            allData.push({ ...data, tanggal: tanggalKey });
+
+            // Statistik per tanggal
+            if (!statistik[tanggalKey]) statistik[tanggalKey] = 0;
+            statistik[tanggalKey] += parseInt(data.jumlah.replace(/\D/g, ""));
+
+            totalPengeluaran += parseInt(data.jumlah.replace(/\D/g, ""));
+            if (parseInt(d) > tanggalTerakhir) tanggalTerakhir = parseInt(d);
         }
     });
 
-    if (!dataDitemukan) {
-        dataTabel.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Tidak ada data</td></tr>`;
-    }
+    // Urutkan data berdasarkan tanggal
+    allData.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
 
-    totalPengeluaran.textContent = `Rp ${new Intl.NumberFormat("id-ID").format(total)}`;
-}
-
-// ** 4. Fungsi Download CSV **
-function downloadCSVFile() {
-    if (!dataTabel || !totalPengeluaran) return;
-
-    let csv = "Tanggal,Kategori,Deskripsi,Jumlah\n";
-    const rows = dataTabel.querySelectorAll("tr");
-
-    rows.forEach((row) => {
-        let cols = row.querySelectorAll("td");
-        let rowData = [];
-        cols.forEach((col) => rowData.push(col.innerText));
-        csv += rowData.join(",") + "\n";
+    // Tampilkan tabel utama
+    tableBody.innerHTML = "";
+    allData.forEach((data) => {
+        tableBody.innerHTML += `
+            <tr>
+                <td>${data.tanggal}</td>
+                <td>${data.kategori}</td>
+                <td>${data.deskripsi}</td>
+                <td>${formatRupiah(data.jumlah)}</td>
+            </tr>`;
     });
 
-    csv += `Total,,${totalPengeluaran.textContent},\n`;
-
-    let hiddenElement = document.createElement("a");
-    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
-    hiddenElement.target = "_blank";
-    hiddenElement.download = `Pengeluaran_${yearSelection.value}_${monthOption.value}.csv`;
-    hiddenElement.click();
-}
-
-// ** 5. Event Listener dengan Pengecekan Elemen **
-document.addEventListener("DOMContentLoaded", function() {
-    isiFilterTahunBulan();
-    if (yearSelection && monthOption) {
-        yearSelection.addEventListener("change", tampilkanData);
-        monthOption.addEventListener("change", tampilkanData);
+    // Inisialisasi DataTable
+    if ($.fn.DataTable.isDataTable("#tabel-data")) {
+        $('#tabel-data').DataTable().destroy();
     }
+    $('#tabel-data').DataTable({
+        pageLength: 15,
+        order: [[0, "asc"]],
+        language: {
+            search: "Cari:",
+            lengthMenu: "Tampilkan _MENU_ data per halaman",
+            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+            paginate: { previous: "Sebelumnya", next: "Berikutnya" },
+            zeroRecords: "Tidak ada data ditemukan"
+        }
+    });
+
+    // Statistik Tabel
+    statistikBody.innerHTML = "";
+    for (let i = 1; i <= tanggalTerakhir; i++) {
+        let day = i.toString().padStart(2, "0");
+        let tanggal = `${tahun}-${bulan}-${day}`;
+        let jumlah = statistik[tanggal] || 0;
+        statistikBody.innerHTML += `
+            <tr>
+                <td>${tanggal}</td>
+                <td>${formatRupiah(jumlah)}</td>
+            </tr>`;
+    }
+
+    // Update total dan rata-rata
+    totalPengeluaranEl.textContent = formatRupiah(totalPengeluaran);
+    let rata2 = totalPengeluaran / tanggalTerakhir;
+    rataRataEl.textContent = formatRupiah(Math.round(rata2));
+}
+// Event
+document.addEventListener("DOMContentLoaded", () => {
+    isiFilterTahunBulan();
+    if (yearSelect && monthSelect) {
+        yearSelect.addEventListener("change", tampilkanData);
+        monthSelect.addEventListener("change", tampilkanData);
+    }
+
     if (downloadCSV) {
-        downloadCSV.addEventListener("click", downloadCSVFile);
+        downloadCSV.addEventListener("click", () => {
+            let csv = "Tanggal,Kategori,Deskripsi,Jumlah\n";
+            const rows = document.querySelectorAll("#tabel-body tr");
+            rows.forEach(row => {
+                const cols = row.querySelectorAll("td");
+                const data = Array.from(cols).map(col => col.textContent);
+                csv += data.join(",") + "\n";
+            });
+            csv += `Total,,,,${totalPengeluaranEl.textContent}\n`;
+
+            let hiddenElement = document.createElement("a");
+            hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
+            hiddenElement.download = `pengeluaran_${yearSelect.value}_${monthSelect.value}.csv`;
+            hiddenElement.click();
+        });
     }
 });
