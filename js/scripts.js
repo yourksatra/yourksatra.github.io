@@ -54,7 +54,7 @@ if (form) {
 
 // ** 2. Mengisi Filter Tahun & Bulan dari Firestore **
 async function isiFilterTahunBulan() {
-    if (!yearSelection || !monthOption) return;
+    if (!yearSelect || !monthOption) return;
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
@@ -69,7 +69,7 @@ async function isiFilterTahunBulan() {
     });
 
     // Isi dropdown Tahun
-    yearSelection.innerHTML = '<option disabled selected>Pilih Tahun</option>';
+    yearSelect.innerHTML = '<option disabled selected>Pilih Tahun</option>';
     tahunSet.forEach((tahun) => {
         yearSelection.innerHTML += `<option value="${tahun}">${tahun}</option>`;
     });
