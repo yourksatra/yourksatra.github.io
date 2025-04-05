@@ -115,6 +115,7 @@ async function tampilkanData() {
     });
 
     // Tampilkan tabel utama
+    console.log(data);
     tableBody.innerHTML = allData.map(data => `
         <tr>
             <td>${data.tanggal}</td>
