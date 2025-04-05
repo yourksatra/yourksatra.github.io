@@ -4,8 +4,8 @@ const yearSelect = document.getElementById("tahun");
 const monthSelect = document.getElementById("bulan");
 const tableBody = document.getElementById("tabel-body");
 const statistikBody = document.getElementById("statistik-body");
-const totalPengeluaranEl = document.getElementById("total-pengeluaran");
-const rataRataEl = document.getElementById("rata-rata");
+const totalPengeluaranEl = document.getElementById("statistik-total");
+const rataRataEl = document.getElementById("statistik-rata");
 const downloadCSV = document.getElementById("downloadCSV");
 
 // Import Firebase
@@ -39,11 +39,14 @@ if (form) {
         const deskripsi = document.getElementById("deskripsi").value;
 
         try {
-            if(kategori == 'custom'){
-                await addDoc(collection(db, "pengeluaran"), { tanggal, kategoriManual, jumlah, deskripsi });
-            }else{
-                await addDoc(collection(db, "pengeluaran"), { tanggal, kategori, jumlah, deskripsi });
+            let data = { tanggal, jumlah, deskripsi };
+            if (kategori === "custom") {
+                data.kategori = kategoriManual;
+            } else {
+                data.kategori = kategori;
             }
+
+            await addDoc(collection(db, "pengeluaran"), data);
             Swal.fire("Sukses", "Data berhasil disimpan", "success");
             form.reset();
         } catch (error) {
@@ -56,9 +59,7 @@ if (form) {
 async function isiFilterTahunBulan() {
     if (!yearSelect || !monthSelect) return;
 
-    const pengeluaranRef = collection(db, "pengeluaran");
-    const snapshot = await getDocs(pengeluaranRef);
-    
+    const snapshot = await getDocs(collection(db, "pengeluaran"));
     let tahunSet = new Set();
     let bulanSet = new Set();
 
@@ -83,7 +84,6 @@ async function isiFilterTahunBulan() {
 }
 
 // ** 3. Menampilkan Data yang Difilter **
-// Tampilkan Data
 async function tampilkanData() {
     const tahun = yearSelect.value;
     const bulan = monthSelect.value;
@@ -107,9 +107,9 @@ async function tampilkanData() {
 
             // Statistik per tanggal
             if (!statistik[tanggalKey]) statistik[tanggalKey] = 0;
-            statistik[tanggalKey] += parseInt(data.jumlah.replace(/\D/g, ""));
+            statistik[tanggalKey] += parseInt(data.jumlah);
 
-            totalPengeluaran += parseInt(data.jumlah.replace(/\D/g, ""));
+            totalPengeluaran += parseInt(data.jumlah);
             if (parseInt(d) > tanggalTerakhir) tanggalTerakhir = parseInt(d);
         }
     });
@@ -118,16 +118,14 @@ async function tampilkanData() {
     allData.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
 
     // Tampilkan tabel utama
-    tableBody.innerHTML = "";
-    allData.forEach((data) => {
-        tableBody.innerHTML += `
-            <tr>
-                <td>${data.tanggal}</td>
-                <td>${data.kategori}</td>
-                <td>${data.deskripsi}</td>
-                <td>Rp ${new Intl.NumberFormat("id-ID").format(data.jumlah)}</td>
-            </tr>`;
-    });
+    tableBody.innerHTML = allData.map(data => `
+        <tr>
+            <td>${data.tanggal}</td>
+            <td>${data.kategori}</td>
+            <td>${data.deskripsi}</td>
+            <td>${formatRupiah(data.jumlah)}</td>
+        </tr>
+    `).join("");
 
     // Inisialisasi DataTable
     if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
@@ -150,14 +148,14 @@ async function tampilkanData() {
         let day = i.toString().padStart(2, "0");
         let tanggal = `${tahun}-${bulan}-${day}`;
         let jumlah = statistik[tanggal] || 0;
-    
+
         statistikBody.innerHTML += `
             <tr>
                 <td>${tanggal}</td>
                 <td>${formatRupiah(jumlah)}</td>
             </tr>`;
     }
-    
+
     // Update total dan rata-rata
     totalPengeluaranEl.textContent = formatRupiah(totalPengeluaran);
     let rata2 = totalPengeluaran / tanggalTerakhir;
@@ -168,7 +166,7 @@ function formatRupiah(angka) {
     return "Rp " + new Intl.NumberFormat("id-ID").format(angka);
 }
 
-// Event
+// Event Listener
 document.addEventListener("DOMContentLoaded", () => {
     isiFilterTahunBulan();
     if (yearSelect && monthSelect) {
@@ -185,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = Array.from(cols).map(col => col.textContent);
                 csv += data.join(",") + "\n";
             });
-            csv += `Total,,,,${totalPengeluaranEl.textContent}\n`;
 
             let hiddenElement = document.createElement("a");
             hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
