@@ -125,7 +125,7 @@ async function tampilkanData() {
                 <td>${data.tanggal}</td>
                 <td>${data.kategori}</td>
                 <td>${data.deskripsi}</td>
-                <td>${formatRupiah(data.jumlah)}</td>
+                <td>Rp ${new Intl.NumberFormat("id-ID").format(data.jumlah)}</td>
             </tr>`;
     });
 
@@ -154,14 +154,14 @@ async function tampilkanData() {
         statistikBody.innerHTML += `
             <tr>
                 <td>${tanggal}</td>
-                <td>${formatRupiah(jumlah)}</td>
+                <td>Rp ${new Intl.NumberFormat("id-ID").format(data.jumlah)}</td>
             </tr>`;
     }
 
     // Update total dan rata-rata
-    totalPengeluaranEl.textContent = formatRupiah(totalPengeluaran);
+    totalPengeluaranEl.textContent = new Intl.NumberFormat("id-ID").format(totalPengeluaran);
     let rata2 = totalPengeluaran / tanggalTerakhir;
-    rataRataEl.textContent = formatRupiah(Math.round(rata2));
+    rataRataEl.textContent = new Intl.NumberFormat("id-ID").format(Math.round(rata2));
 }
 // Event
 document.addEventListener("DOMContentLoaded", () => {
