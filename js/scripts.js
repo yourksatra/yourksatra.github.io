@@ -114,9 +114,6 @@ async function tampilkanData() {
         }
     });
 
-    // Urutkan data berdasarkan tanggal
-    allData.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
-
     // Tampilkan tabel utama
     tableBody.innerHTML = allData.map(data => `
         <tr>
