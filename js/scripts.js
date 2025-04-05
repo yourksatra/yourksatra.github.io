@@ -126,7 +126,6 @@ async function tampilkanData() {
                 <td>${formatRupiah(data.jumlah || 0)}</td>
             </tr>
         `;
-        tableBody.appendChild(row);
     });
 
     // Inisialisasi DataTable
