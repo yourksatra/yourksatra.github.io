@@ -115,6 +115,7 @@ async function tampilkanData() {
     });
 
     // Tampilkan tabel utama
+    console.log(allData);
     tableBody.innerHTML = ""; // Kosongkan tabel dulu
     allData.forEach((data) => {
         const row = document.createElement("tr");
