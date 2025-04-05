@@ -134,20 +134,20 @@ async function tampilkanData() {
         `).join("");
     }
 
-    // ** Inisialisasi DataTable (Reset jika sudah ada) **
-    if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
-        $('#pengeluaranTable').DataTable().destroy();
-    }
-    $('#pengeluaranTable').DataTable({
-        order: [[0, "asc"]],
-        language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ data per halaman",
-            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-            paginate: { previous: "Sebelumnya", next: "Berikutnya" },
-            zeroRecords: "Tidak ada data ditemukan"
-        }
-    });
+    // // ** Inisialisasi DataTable (Reset jika sudah ada) **
+    // if ($.fn.DataTable.isDataTable("#pengeluaranTable")) {
+    //     $('#pengeluaranTable').DataTable().destroy();
+    // }
+    // $('#pengeluaranTable').DataTable({
+    //     order: [[0, "asc"]],
+    //     language: {
+    //         search: "Cari:",
+    //         lengthMenu: "Tampilkan _MENU_ data per halaman",
+    //         info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+    //         paginate: { previous: "Sebelumnya", next: "Berikutnya" },
+    //         zeroRecords: "Tidak ada data ditemukan"
+    //     }
+    // });
 
     // ** Statistik Tabel **
     statistikBody.innerHTML = "";
