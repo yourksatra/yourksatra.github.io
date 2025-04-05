@@ -54,7 +54,7 @@ if (form) {
 
 // ** 2. Mengisi Filter Tahun & Bulan dari Firestore **
 async function isiFilterTahunBulan() {
-    if (!yearSelect || !monthOption) return;
+    if (!yearSelect || !monthSelect) return;
 
     const pengeluaranRef = collection(db, "pengeluaran");
     const snapshot = await getDocs(pengeluaranRef);
@@ -75,10 +75,10 @@ async function isiFilterTahunBulan() {
     });
 
     // Isi dropdown Bulan
-    monthOption.innerHTML = '<option disabled selected>Pilih Bulan</option>';
+    monthSelect.innerHTML = '<option disabled selected>Pilih Bulan</option>';
     const bulanNama = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     bulanSet.forEach((bulan) => {
-        monthOption.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
+        monthSelect.innerHTML += `<option value="${bulan}">${bulanNama[parseInt(bulan) - 1]}</option>`;
     });
 }
 
