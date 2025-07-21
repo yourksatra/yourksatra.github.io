@@ -1,0 +1,257 @@
+{
+    "tools": [
+        {
+            "name": "PHP",
+            "type": "Bahasa Pemograman",
+            "level": "Advanced",
+            "img": "PHP.png"
+        },
+        {
+            "name": "JavaScript",
+            "type": "Bahasa Pemograman",
+            "level": "Basic",
+            "img": "JavaScript.png"
+        },
+        {
+            "name": "C++",
+            "type": "Bahasa Pemograman",
+            "level": "Intermediate",
+            "img": "cpp.png"
+        },
+        {
+            "name": "Python",
+            "type": "Bahasa Pemograman",
+            "level": "Intermediate",
+            "img": "Python.png"
+        },{
+            "name": "CodeIgniter",
+            "type": "Framework PHP",
+            "level": "Intermediate",
+            "img": "CI.png"
+        },
+        {
+            "name": "Laravel",
+            "type": "Framework PHP",
+            "level": "Intermediate",
+            "img": "laravel.png"
+        },
+        {
+            "name": "Bootstrap",
+            "type": "Framework CSS",
+            "level": "Intermediate",
+            "img": "bootstrap.png"
+        },
+        {
+            "name": "JQuery",
+            "type": "JavaScript Library",
+            "level": "Intermediate",
+            "img": "jQuery.png"
+        },
+        {
+            "name": "Visual Studio Code",
+            "type": "Text Editor",
+            "level": "Advanced",
+            "img": "VSC.png"
+        },
+        {
+            "name": "GitHub",
+            "type": "Repository",
+            "level": "Intermediate",
+            "img": "Github.png"
+        },
+        {
+            "name": "Postman",
+            "type": "API Testing",
+            "level": "Basic",
+            "img": "postman.png"
+        },
+        {
+            "name": "DBeaver",
+            "type": "Database Management Tool",
+            "level": "Basic",
+            "img": "DBeaver.png"
+        },
+        {
+            "name": "Photoshop",
+            "type": "Design App",
+            "level": "Intermediate",
+            "img": "Photoshop.png"
+        },
+        {
+            "name": "Illustrator",
+            "type": "Design App",
+            "level": "Basic",
+            "img": "Illustrator.png"
+        },
+        {
+            "name": "Figma",
+            "type": "Design App",
+            "level": "Intermediate",
+            "img": "Figma.png"
+        },
+        {
+            "name":"Laragon",
+            "type":"Local Server",
+            "level":"Advanced",
+            "img": "Laragon.png"
+        }
+    ],
+    "experience": [
+        {
+            "title": "Web Programmer Internship",
+            "type": "period",
+            "startDate": "2024-09",
+            "endDate": "2025-01",
+            "description": "Selama saya magang sebagai Web Programmer di Sahabat Mediacom saya mengikuti kursus intensif internal dua kali seminggu untuk memperdalam pemahaman tentang pengembangan website. Pada akhir program, saya diberikan tanggung jawab untuk menguji integrasi data RS Online dengan modul Bridging RS Online Versi 3 (April 2024), yang menjadi bagian dari pengembangan sistem informasi rumah sakit.",
+            "organizer": "CV.Sahabat (Sahabat Mediacom)",
+            "location": "Yogyakarta, Indonesia",
+            "certificateImg": "LogoCVSahabat.png"
+        },
+        {
+            "title": "Kuliah Umum Univesitas AMIKOM Yogyakarta",
+            "type": "onetime",
+            "date": "2021-07-24",
+            "description": "Mengikuti Kuliah Umum Universitas AMIKOM Yogyakarta tahun 2021 sebagai peserta. Kuliah umum bertujuan untuk memberikan wawasan dan motivasi kepada mahasiswa baru mengenai kampus dan berbagai prestasinya.",
+            "organizer": "Universitas AMIKOM Yogyakarta",
+            "location": "Online",
+            "certificateImg": "KU.jpg"
+        },
+        {
+            "title": "Introduction To Computer (ITC) 2021",
+            "type":"onetime",
+            "date":"2021-11-26",
+            "description": "Mengikuti acara ITC 2021 sebagai peserta divisi Computer Graphics. Pembahasan materi seputar design graphic, dan praktek sederhana menggunakan Adobe Illustrator dan After Effects.",
+            "organizer": "Universitas AMIKOM Yogyakarta",
+            "location":"Online",
+            "certificateImg":"ITC21.jpg"
+        },
+        {
+            "title": "Pelatihan Member AMCC 2021/2022",
+            "type": "period",
+            "startDate": "2022-01",
+            "endDate": "2022-06",
+            "description": "Mengikuti program pelatihan member Amikom Computer Club divisi Web Programming. Selama priod pelatihan materi yang diberikan mengenai pengembangan website serta proyek mengembangkan website sederhana menggunakan HTML, CSS, JS secara mandiri.",
+            "organizer": "Amikom Computer Club (AMCC)",
+            "location": "Online",
+            "certificateImg":"AMCC2122.jpg"
+        },
+        {
+            "title": "Gelar Karya Mahasiswa 2022/2023",
+            "type": "period",
+            "startDate": "2023-02",
+            "endDate": "2023-03",
+            "description": "Mengikuti Gelar Karya Mahasiswa Sistem Informasi (GEMASI) tahun 2022/2023 sebagai Perwakilan Kelas. GEMASI adalah suatu ajang kompetisi untuk mahasiswa di prodi Sistem Informasi. Karya proyek-proyek mata kuliah mahasiswa program studi Sistem Informasi dapat didaftarkan sebagai karya inovasi pada ajang GEMASI.",
+            "organizer": "Universitas AMIKOM Yogyakarta",
+            "location": "Sleman, DIY",
+            "certificateImg":"GEMASI2223.jpg"
+        },
+        {
+            "title": "Asisten Praktikum Mata Kuliah Pemrograman Terstruktur",
+            "type": "period",
+            "startDate": "2023-03",
+            "endDate": "2023-07",
+            "description": "Menjadi Asisten Praktikum Mata Kuliah Pemrograman Terstruktur Program Studi Sistem Informasi Pada Semester Genap TA. 2022/2023. Membantu dosen dalam memberikan materi dan mengevaluasi hasil praktikum.",
+            "organizer": "Forum Asisten Universitas AMIKOM Yogyakarta",
+            "location": "Sleman, DIY",
+            "certificateImg":"AsprakPT2223.jpg"
+        },
+        {
+            "title": "Asisten Praktikum Mata Kuliah Struktur Data",
+            "type": "period",
+            "startDate": "2023-09",
+            "endDate": "2024-01",
+            "description": "Menjadi Asisten Praktikum Mata Kuliah Struktur Data Program Studi Sistem Informasi Pada Semester Ganjil TA. 2023/2024.",
+            "organizer": "Forum Asisten Universitas AMIKOM Yogyakarta",
+            "location": "Sleman, DIY",
+            "certificateImg":"AsprakSD2324.jpg"
+        },
+        {
+            "title": "Asisten Praktikum Mata Kuliah Pemrograman Terstruktur",
+            "type": "period",
+            "startDate": "2024-02",
+            "endDate": "2024-07",
+            "description": "Menjadi Asisten Praktikum Mata Kuliah Pemrograman Terstruktur Program Studi Sistem Informasi Pada Semester Genap TA. 2023/2024. Membantu dosen dalam memberikan materi dan mengevaluasi hasil praktikum.",
+            "organizer": "Forum Asisten Universitas AMIKOM Yogyakarta",
+            "location": "Sleman, DIY",
+            "certificateImg":"AsprakPT2324.jpg"
+        },
+        {
+            "title": "IFCAMP 2023 HIMA IF x Avip Syaifulloh",
+            "type":"onetime",
+            "date":"2021-11-26",
+            "description": "Menjadi peserta program IFCAMP 2023 HIMA IF X Avip Syaifulloh. Acara berlangsung secara daring dengan materi Building Apps with Framework Laravel.",
+            "organizer": "Himpunan Mahasiswa S1-Informatika Universitas TELKOM",
+            "location":"Online",
+            "certificateImg":"Laravel.jpg"
+        },
+        {
+            "title": "International Bootcamp Data Analyst",
+            "type":"onetime",
+            "date":"2024-05-25",
+            "description": "Mengikuti program Data Analyst International Bootcamp diselenggaran oleh SmartPath. Acara pertama bertema Overview of Data Analysis, Career, and Salary",
+            "organizer": "SmartPath",
+            "location":"Online",
+            "certificateImg":"DTanalis.png"
+        },
+        {
+            "title": "International Bootcamp Data Analyst",
+            "type":"onetime",
+            "date":"2024-06-02",
+            "description": "Mengikuti program Data Analyst International Bootcamp diselenggaran oleh SmartPath. Tema kedua Mastering SQL Fundamental: From Concept to Application",
+            "organizer": "SmartPath",
+            "location":"Online",
+            "certificateImg":"MSQL.png"
+        },
+        {
+            "title": "International Bootcamp Data Analyst",
+            "type":"onetime",
+            "date":"2024-06-08",
+            "description": "Mengikuti program Data Analyst International Bootcamp diselenggaran oleh SmartPath. Tema ketiga Elevating Your SQL Skills: Intermediate Techniques for Data Analysis",
+            "organizer": "SmartPath",
+            "location":"Online",
+            "certificateImg":"SQLSkill.png"
+        }
+    ],
+    "project": [
+        {
+            "title":"Sistem pelaporan Data Capaian Standar Pelayanan Minimal Bidang Kesehatan berbasis Website",
+            "description":"Saya membangun sistem yang dapat memfasilitasi pelaporan Standar Pelayanan Minimal (SPM) Bidang Kesehatan di Dinas Kesehatan Kabupaten Sumbawa. Website ini dibangun menggunakan framework Laravel 10 dan Database MySQL.",
+            "techInformation": ["PHP","JavaScript","Laravel","MySQL", "Bootstrap", "JQuery"],
+            "img-thumbnail":"1.png",
+            "img-folder":"project1",
+            "total-img":13
+        },
+        {
+            "title":"Web Inventarisasi Laboratorium Fisioterapi UMS",
+            "description":"SPada bulan Maret hingga April 2024, saya mengembangkan sistem peminjaman alat laboratorium untuk Inventaris Laboratorium Fisioterapi di Universitas Muhammadiyah Surakarta. Sistem ini dirancang berbasis website untuk mempermudah proses peminjaman dan pengelolaan alat-alat laboratorium. Proyek ini memungkinkan pengguna untuk melakukan peminjaman secara efisien, serta membantu pihak laboratorium dalam memantau dan mengelola inventaris alat dengan lebih terstruktur.",
+            "techInformation": ["PHP","CodeIgniter","MySQL", "Bootstrap"],
+            "img-thumbnail":"1.png",
+            "img-folder":"project2",
+            "total-img":4
+        },
+        {
+            "title":"Sistem Rekomendasi Film dengan Model Spearman Rank Correlation dan Algoritma Item-Based Collaborative Filtering",
+            "description":"Pada semester ganjil tahun akademik 2023/2024, saya mengerjakan proyek Ujian Akhir Semester untuk mata kuliah Sistem Rekomendasi dengan judul 'Studi Kasus Rekomendasi Film Berdasarkan Genre dan Data Pemeran Film (Actor) dengan Model Spearman Rank Correlation dan Algoritma Item-Based Collaborative Filtering.' Proyek ini dikembangkan menggunakan bahasa Python dan memanfaatkan teknologi Google Colab. Dalam proyek ini, saya mengimplementasikan model Spearman Rank Correlation dan algoritma Item-Based Collaborative Filtering untuk membangun sistem rekomendasi film yang mempertimbangkan preferensi genre dan aktor. Melalui proyek ini, saya memperdalam pemahaman saya tentang teknik-teknik dalam sistem rekomendasi dan penerapannya dalam dunia nyata.",
+            "techInformation": ["Phyton","Google Colabs","Kaggle"],
+            "img-thumbnail":"1.png",
+            "img-folder":"project3",
+            "total-img":5
+        },
+        {
+            "title":"HealthyDoc, Sistem Informasi Rekam Medis Berbasis Web",
+            "description":"Pada Ujian Akhir Semester Genap tahun akademik 2022/2023 untuk mata kuliah Digital Bisnis, saya merancang dan mengembangkan sebuah website bernama HealthyDoc menggunakan framework CodeIgniter 3. HealthyDoc adalah sebuah platform Rekam Medis Elektronik yang dirancang sebagai fasilitas digital untuk penyimpanan dan pengelolaan data kesehatan. Proyek ini bertujuan untuk mempermudah akses dan manajemen informasi medis, sehingga dapat mendukung efisiensi dalam dunia kesehatan. Melalui pengembangan ini, saya berhasil mengintegrasikan pengetahuan teknis dengan kebutuhan bisnis digital yang relevan di bidang kesehatan.",
+            "techInformation": ["PHP","CodeIgniter","Bootstrap","JavaScript","JQuery","MySQL"],
+            "img-thumbnail":"1.png",
+            "img-folder":"project4",
+            "total-img":17
+        },
+        {
+            "title":"Program Kasir Rental atau Peminjaman Mobil. Menggunakan bahasa pemograman C++",
+            "description":"Pada semester genap tahun akademik 2021/2022, saya mengembangkan sebuah program kasir untuk rental mobil menggunakan bahasa pemrograman C++ sebagai bagian dari Ujian Akhir Semester mata kuliah Pemrograman Terstruktur. Melalui proyek ini, saya dapat mengaplikasikan konsep-konsep pemrograman terstruktur yang telah dipelajari dan meningkatkan pemahaman saya dalam membangun aplikasi berbasis C++.",
+            "techInformation": ["CPP/C++","Visual Studio Code","MinGW", "CMD"],
+            "img-thumbnail":"1.png",
+            "img-folder":"project5",
+            "total-img":11
+        }
+    ]
+}
