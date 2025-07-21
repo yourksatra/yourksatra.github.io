@@ -291,7 +291,7 @@ main .home {
     text-align: center;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 570px) {
     .about-section {
         padding-inline: 1rem;
         padding-block: 6rem;
