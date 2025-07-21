@@ -1,0 +1,444 @@
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    opacity: 0;
+}
+
+.animate-slide-up.active {
+    animation: slideUp 0.6s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+/* Navbar */
+.navbar {
+    margin: 8px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 0px 11px 1px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-scrolled {
+    margin: 0;
+    border-radius: 0;
+}
+
+main .home {
+    margin-top: 70px;
+}
+
+/* About */
+.about-section {
+    background-color: whitesmoke;
+    padding: 8rem;
+    text-align: center;
+}
+
+/* Skills */
+.skill-section {
+    text-align: center;
+    padding: 8rem 0.5rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.skill-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-card img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 12px;
+}
+
+.skill-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.skill-name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    background: -webkit-linear-gradient(315deg, #0066ff 0%, #006636 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.skill-name .skill-level {
+    font-size: 0.7rem;
+    font-weight: normal;
+    margin-left: 1px;
+    background: #888;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.skill-type {
+    font-size: 0.9em;
+    color: #888;
+    margin: 2px 0 0;
+}
+
+.skills-btn {
+    font-size: 11px;
+    display: none;
+}
+
+/* Experience */
+.expr-section {
+    display: block;
+    background-color: whitesmoke;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.expr-section .lead {
+    margin-bottom: 16px;
+}
+
+.expr-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    overflow: hidden;
+    max-height: fit-content;
+    /* cukup besar untuk semua item */
+    transition: max-height 0.5s ease;
+}
+
+.expr-btn {
+    font-size: 11px;
+}
+
+.expr-section.collapsed .expr-grid {
+    max-height: 1100px;
+}
+
+.expr-card {
+    border: 0;
+    border-radius: 16px;
+    margin-bottom: 16px;
+}
+
+.expr-card .row .col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expr-card .img-fluid {
+    width: auto;
+    height: 250px;
+}
+
+#exprModal .modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+}
+
+/* projects */
+.project-section {
+    display: block;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.project-section .lead {
+    margin-bottom: 16px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    overflow: hidden;
+    max-height: fit-content;
+    gap: 20px;
+    /* cukup besar untuk semua item */
+    transition: max-height 0.5s ease;
+}
+
+.project-btn {
+    font-size: 11px;
+}
+
+.project-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.project-content {
+    flex: 1;
+    text-align: left;
+}
+
+.project-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.project-content p {
+    margin: 0;
+    color: #333;
+    line-height: 1.5;
+}
+
+.project-tech {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-tech span {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #000;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: default;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.project-tech span:hover {
+    background-color: #d0eaff;
+    transform: translateY(-2px);
+}
+
+.project-img-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.project-img {
+    max-width: 450px;
+    height: auto;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.project-img-wrapper:hover .project-img {
+    opacity: 0.8;
+    transform: scale(1.02);
+    position: relative;
+}
+
+.project-img-wrapper:hover::after {
+    content: 'Klik untuk memperbesar';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.project-buttons {
+    display: none;
+}
+
+.project-section.collapsed .project-grid {
+    max-height: 720px;
+}
+
+/* Contact */
+.contact-section {
+    display: block;
+    padding: 2rem;
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+    .about-section {
+        padding-inline: 1rem;
+        padding-block: 6rem;
+    }
+
+    .about-section .lead {
+        font-size: 16px;
+    }
+
+    .about-section .description {
+        font-size: 12px;
+    }
+
+    .skill-section {
+        display: block;
+        padding: 4rem 0.5rem;
+    }
+
+    .skill-section .lead {
+        font-size: 18px;
+        padding-inline: 30px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        overflow: hidden;
+        padding: 24px 2px;
+        max-height: 2440px;
+        /* cukup besar untuk semua item */
+        transition: max-height 0.5s ease;
+    }
+
+    .skill-card img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .skill-name {
+        font-size: 12px;
+    }
+
+    .skill-name .skill-level {
+        display: none;
+    }
+
+    .skill-type {
+        font-size: 8px;
+    }
+
+    .skill-section.collapsed .skills-grid {
+        max-height: 320px;
+    }
+
+    .skills-btn {
+        display: inline-block;
+        margin-block: 20px;
+    }
+
+    .expr-section .lead {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .expr-section.collapsed .expr-grid {
+        max-height: 1440px;
+    }
+
+    .expr-card {
+        margin-block: -1.5rem;
+        margin-inline: -1rem;
+        scale: 0.9;
+    }
+
+    .expr-card .img-fluid {
+        width: 180px;
+        height: auto;
+    }
+
+    .project-section {
+        margin-inline: 1rem;
+    }
+
+    .project-section .lead {
+        font-size: 16px;
+    }
+
+    .project-section.collapsed .project-grid {
+        max-height: 1080px;
+    }
+
+    .project-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .project-card .project-content h2{
+        font-size: 18px;
+    }
+
+    .project-card .project-content p{
+        font-size: 14px;
+    }
+
+    .project-img-wrapper {
+        display: none;
+    }
+
+    .project-content {
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    .project-tech {
+        margin-top: 10px;
+    }
+
+    .project-buttons {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 0;
+    }        
+
+    .project-buttons button {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        background-color: #0066ff;
+        color: #fff;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    .project-buttons button:hover {
+        background-color: #0055cc;
+    }
+
+    .contact-section {
+        padding: 0;
+        padding-block: 2rem;
+    }
+
+    .contact-section h2 {
+        font-size: medium;
+    }
+}
