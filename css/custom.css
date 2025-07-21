@@ -434,12 +434,11 @@ main .home {
     }
 
     .contact-section {
-        margin-inline: -1.5rem;
         padding: 0;
         padding-block: 2rem;
     }
 
     .contact-section h2 {
-        font-size: medium;
+        font-size: 18px;
     }
 }
