@@ -10,6 +10,12 @@
     }
 }
 
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 .animate-slide-up {
     opacity: 0;
 }
@@ -36,10 +42,6 @@
 
 main .home {
     margin-top: 70px;
-}
-
-body {
-    overflow-x: hidden;
 }
 
 /* About */
@@ -364,9 +366,7 @@ body {
     }
 
     .expr-card {
-        margin-block: -1.5rem;
-        margin-inline: -1rem;
-        scale: 0.9;
+        scale: 0.8;
     }
 
     .expr-card .img-fluid {
@@ -445,10 +445,9 @@ body {
     .contact-section {
         padding: 0;
         padding-block: 2rem;
-        margin-inline: -1rem;
     }
 
     .contact-section h2 {
-        font-size: 18px;
+        font-size: 16px;
     }
 }
