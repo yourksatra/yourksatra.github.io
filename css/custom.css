@@ -38,6 +38,10 @@ main .home {
     margin-top: 70px;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 /* About */
 .about-section {
     background-color: whitesmoke;
@@ -397,6 +401,11 @@ main .home {
 
     .project-img-wrapper {
         display: none;
+    }
+
+    .project-img-wrapper .project-img {
+        width:100px;
+        height: auto;
     }
 
     .project-content {
