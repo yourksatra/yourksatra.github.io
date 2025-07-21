@@ -436,6 +436,7 @@ main .home {
     .contact-section {
         padding: 0;
         padding-block: 2rem;
+        margin-inline: -1rem;
     }
 
     .contact-section h2 {
