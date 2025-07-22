@@ -57,9 +57,9 @@ function renderExperience(experiences) {
         const card = document.createElement('div');
         card.className = 'card expr-card shadow';
         card.innerHTML = `
-            <div class="card-body p-5">
+            <div class="card-body">
                 <div class="row align-items-center gx-5">
-                    <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                    <div class="col text-center text-lg-start">
                         <img src="assets/SERTIP/${exp.certificateImg}" alt="Experience Image" class="img-fluid img-hover"
                             onclick="openExprModal(this)">
                     </div>
