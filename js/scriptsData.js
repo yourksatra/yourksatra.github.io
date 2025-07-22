@@ -55,30 +55,28 @@ function renderExperience(experiences) {
         }
 
         const card = document.createElement('div');
-        card.className = 'card expr-card shadow';
+        card.className = 'expr-card';
         card.innerHTML = `
-            <div class="card-body">
-                <div class="row align-items-center gx-5">
-                    <div class="col text-center text-lg-start">
-                        <img src="assets/SERTIP/${exp.certificateImg}" alt="Experience Image" class="img-fluid img-hover"
+            <div class="expr-card-content">
+                <div class="expr-img">
+                    <img src="assets/SERTIP/${exp.certificateImg}" alt="Experience Image" class="img-fluid img-hover"
                             onclick="openExprModal(this)">
-                    </div>
-                    <div class="col-lg-8 text-lg-start">
-                        <h5 class="fw-bold text-gradient">${exp.title}</h5>
-                        <div class="mb-2">${exp.description}</div>
-                        <div class="bg-light p-4 rounded-4">
-                            <div class="md-1">
-                                <span class="text-gradient fw-bold">Waktu:</span>
-                                <span class="text-muted">${waktuText}</span>
-                            </div>
-                            <div class="md-1">
-                                <span class="text-gradient fw-bold">Penyelenggara:</span>
-                                <span class="text-muted">${exp.organizer}</span>
-                            </div>
-                            <div class="md-1">
-                                <span class="text-gradient fw-bold">Tempat:</span>
-                                <span class="text-muted">${exp.location}</span>
-                            </div>
+                </div>
+                <div class="expr-details">
+                    <h5 class="expr-title text-gradient">${exp.title}</h5>
+                    <div class="expr-description">${exp.description}</div>
+                    <div class="expr-meta">
+                        <div class="meta-item">
+                            <span class="meta-label text-gradient">Waktu:</span>
+                            <span class="meta-value">${waktuText}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label text-gradient">Penyelenggara:</span>
+                            <span class="meta-value">${exp.organizer}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label text-gradient">Tempat:</span>
+                            <span class="meta-value">${exp.location}</span>
                         </div>
                     </div>
                 </div>
