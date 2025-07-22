@@ -13,7 +13,6 @@
 html, body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
 }
 
 .animate-slide-up {
@@ -160,6 +159,10 @@ main .home {
     align-items: center;
 }
 
+.expr-card .card-body {
+    padding: 46px;
+}
+
 .expr-card .img-fluid {
     width: auto;
     height: 250px;
@@ -297,7 +300,18 @@ main .home {
     text-align: center;
 }
 
-@media (max-width: 570px) {
+.card-contact {
+    border-radius: 14px;
+    margin: 5px;
+    padding: 40px;
+}
+
+.card-contact .card-body {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 576px) {
     .about-section {
         padding-inline: 1rem;
         padding-block: 6rem;
@@ -365,8 +379,8 @@ main .home {
         max-height: 1440px;
     }
 
-    .expr-card {
-        scale: 0.8;
+    .expr-card .card-body {
+        padding: 2rem;
     }
 
     .expr-card .img-fluid {
@@ -401,11 +415,6 @@ main .home {
 
     .project-img-wrapper {
         display: none;
-    }
-
-    .project-img-wrapper .project-img {
-        width:100px;
-        height: auto;
     }
 
     .project-content {
@@ -443,11 +452,15 @@ main .home {
     }
 
     .contact-section {
-        padding: 0;
-        padding-block: 2rem;
+        padding: 1rem;
     }
 
     .contact-section h2 {
-        font-size: 16px;
+        font-size: medium;
+    }
+
+    .contact-section .card-contact {
+        margin: 10px;
+        padding: 1.5rem;
     }
 }
