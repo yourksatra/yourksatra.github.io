@@ -45,7 +45,6 @@ Copy code
 </html>
 
 3. Create the PHP Script (submit.php)
-Copy code
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
@@ -76,8 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 4. Create the MySQL Table
 
 Run the following SQL query in your MySQL database:
-
-Copy code
 CREATE DATABASE your_database_name;
 
 USE your_database_name;
