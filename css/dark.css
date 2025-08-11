@@ -1,0 +1,138 @@
+/* Dark Mode Base */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Ganti warna teks utama */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+    color: #ffffff;
+}
+
+.dark-mode p,
+.dark-mode span,
+.dark-mode li,
+.dark-mode label {
+    color: #bbbbbb;
+}
+
+.dark-mode text-muted {
+    color: #ffffff !important;
+}
+
+.dark-mode .badge {
+    color: #121212;
+}
+
+/* Background umum */
+.dark-mode .bg-white {
+    background-color: #1e1e1e !important;
+}
+
+.dark-mode .bg-light,
+.dark-mode .about-section,
+.dark-mode .expr-section,
+.dark-mode .contact-section,
+.dark-mode .section-light {
+    background-color: #2a2a2a !important;
+}
+
+.dark-mode .navbar {
+    background-color: #1e1e1e !important;
+}
+
+/* Border */
+.dark-mode .border {
+    border-color: #333333 !important;
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280,0,0,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,0.85%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Button Primary */
+.dark-mode .btn-primary {
+    background-color: #3399ff !important;
+    border-color: #3399ff !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .btn-primary:hover {
+    background-color: #1a73e8 !important;
+    border-color: #1a73e8 !important;
+}
+
+/* Button Secondary */
+.dark-mode .btn-secondary {
+    background-color: #33cc99 !important;
+    border-color: #33cc99 !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .btn-secondary:hover {
+    background-color: #00a86b !important;
+    border-color: #00a86b !important;
+}
+
+/* Link */
+.dark-mode a {
+    color: #3399ff;
+}
+
+.dark-mode a:hover {
+    color: #66ccff;
+}
+
+/* Gradient Background */
+.dark-mode .bg-gradient-primary-to-secondary {
+    background: linear-gradient(135deg, #3399ff 0%, #33cc99 100%) !important;
+}
+
+.dark-mode .text-gradient {
+  background: -webkit-linear-gradient(315deg, #3399ff 0%, #33cc99 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Card */
+.dark-mode .card,
+.dark-mode .skill-card,
+.dark-mode .expr-card,
+.dark-mode .project-card {
+    background-color: #1e1e1e !important;
+    border-color: #333333 !important;
+}
+
+.dark-mode .expr-meta,
+.dark-mode .project-tech span {
+    background-color: #2a2a2a;
+}
+
+.dark-mode #exprModal .modal-body, 
+.dark-mode #projectModal .modal-header,
+.dark-mode #projectModal .modal-body,
+.dark-mode #projectModal .modal-footer {
+    background-color: #121212;
+}
+
+/* Input & Form */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+    background-color: #2a2a2a !important;
+    border-color: #444444 !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+    color: #999999 !important;
+}
