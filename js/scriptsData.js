@@ -17,7 +17,7 @@ function renderTools(tools) {
         card.innerHTML = `
             <img src="assets/Tools/${tool.img}" alt="${tool.name}">
             <div class="skill-info">
-                <p class="skill-name">${tool.name} <span class="skill-level">(${tool.level})</span></p>
+                <p class="skill-name text-gradient">${tool.name} <span class="skill-level">(${tool.level})</span></p>
                 <p class="skill-type">${tool.type}</p>
             </div>
         `;
@@ -133,10 +133,11 @@ function renderProjects(projects) {
                     onclick="openModal(this)" />
             </div>
             <div class="project-buttons">
-                <button onclick="openModal(this)">Lihat Gambar</button>
+                <button class="btn btn-primary" onclick="openModal(this)">Lihat Gambar</button>
             </div>
         `;
 
         container.appendChild(card);
     });
+
 }
