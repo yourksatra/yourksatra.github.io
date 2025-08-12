@@ -103,6 +103,14 @@
     -webkit-text-fill-color: transparent;
 }
 
+.dark-mode .profile .dots-2 svg {
+  fill: #33cc99;
+}
+
+.dark-mode .profile .dots-4 svg {
+  fill: #3399ff;
+}
+
 /* Card */
 .dark-mode .card,
 .dark-mode .skill-card,
