@@ -40,6 +40,38 @@ body {
     border-radius: 0;
 }
 
+#darkModeToggle {
+    border: none;
+    border-radius: 50px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    background-color: var(--bs-light);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2),
+        -2px -2px 5px rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease-in-out;
+}
+
+body.light-mode #darkModeToggle {
+    background-color: var(--bs-light);
+    color: #333;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2),
+        -2px -2px 5px rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode #darkModeToggle {
+    background-color: var(--bs-dark);
+    color: #eee;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.6),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.05);
+}
+
+#darkModeToggle img {
+    display: block;
+}
+
 main .home {
     margin-top: 70px;
 }
@@ -94,9 +126,6 @@ main .home {
     font-size: 1rem;
     font-weight: bold;
     margin: 0;
-    background: -webkit-linear-gradient(315deg, #0066ff 0%, #006636 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .skill-name .skill-level {
@@ -341,7 +370,24 @@ main .home {
     align-items: center;
 }
 
+@media (min-width: 992px) {
+    #darkModeToggle span {
+        display: none;
+    }
+}
+
 @media (max-width: 576px) {
+    #darkModeToggle {
+        border-radius: 8px;
+        /* Lebih kotak biar rapi di list */
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    #darkModeToggle span {
+        display: inline;
+    }
+
     .about-section {
         padding-inline: 1rem;
         padding-block: 6rem;
