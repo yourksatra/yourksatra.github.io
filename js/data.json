@@ -105,7 +105,7 @@
             "description": "Selama saya magang sebagai Web Programmer di Sahabat Mediacom saya mengikuti kursus intensif internal dua kali seminggu untuk memperdalam pemahaman tentang pengembangan website. Pada akhir program, saya diberikan tanggung jawab untuk menguji integrasi data RS Online dengan modul Bridging RS Online Versi 3 (April 2024), yang menjadi bagian dari pengembangan sistem informasi rumah sakit.",
             "organizer": "CV.Sahabat (Sahabat Mediacom)",
             "location": "Yogyakarta, Indonesia",
-            "certificateImg": "LogoCVSahabat.png"
+            "certificateImg": ["LogoCVSahabat.png","MagangSMC.jpg"]
         },
         {
             "title": "Kuliah Umum Univesitas AMIKOM Yogyakarta",
@@ -255,3 +255,4 @@
         }
     ]
 }
+
