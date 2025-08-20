@@ -59,7 +59,7 @@ function renderExperience(experiences) {
         card.innerHTML = `
             <div class="expr-card-content">
                 <div class="expr-img">
-                    <img src="assets/SERTIP/${exp.certificateImg}" alt="Experience Image" class="img-fluid img-hover"
+                    <img src="assets/SERTIP/${exp.certificateImg[0]}" alt="Experience Image" class="img-fluid img-hover"
                             onclick="openExprModal(this)">
                 </div>
                 <div class="expr-details">
@@ -141,3 +141,4 @@ function renderProjects(projects) {
     });
 
 }
+
