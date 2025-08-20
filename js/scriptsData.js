@@ -60,7 +60,7 @@ function renderExperience(experiences) {
             <div class="expr-card-content">
                 <div class="expr-img">
                     <img src="assets/SERTIP/${exp.certificateImg[0]}" alt="Experience Image" class="img-fluid img-hover"
-                            onclick="openExprModal(this)">
+                           data-images='${JSON.stringify(exp.certificateImg)}' onclick="openExprModal(this)">
                 </div>
                 <div class="expr-details">
                     <h5 class="expr-title text-gradient">${exp.title}</h5>
@@ -141,4 +141,5 @@ function renderProjects(projects) {
     });
 
 }
+
 
