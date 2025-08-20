@@ -83,7 +83,8 @@ function openModal(element) {
 }
 
 function openExprModal(element) {
-    const imgSrc = element.getAttribute('src');
+    const images = JSON.parse(element.getAttribute('data-images'));
+    const imgSrc = images[1] ? `assets/SERTIP/${images[1]}` : `assets/SERTIP/${images[0]}`;
     const modalContent = document.getElementById('exprModalBody');
     // Masukkan gambar baru
     modalContent.innerHTML = `<img src="${imgSrc}" alt="Experience Image" class="img-fluid">`;
@@ -173,4 +174,5 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleProjectBtn.textContent = 'Tutup';
         }
     });
+
 });
