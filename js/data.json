@@ -114,7 +114,7 @@
             "description": "Mengikuti Kuliah Umum Universitas AMIKOM Yogyakarta tahun 2021 sebagai peserta. Kuliah umum bertujuan untuk memberikan wawasan dan motivasi kepada mahasiswa baru mengenai kampus dan berbagai prestasinya.",
             "organizer": "Universitas AMIKOM Yogyakarta",
             "location": "Online",
-            "certificateImg": "KU.jpg"
+            "certificateImg":["KU.jpg"]
         },
         {
             "title": "Introduction To Computer (ITC) 2021",
@@ -123,7 +123,7 @@
             "description": "Mengikuti acara ITC 2021 sebagai peserta divisi Computer Graphics. Pembahasan materi seputar design graphic, dan praktek sederhana menggunakan Adobe Illustrator dan After Effects.",
             "organizer": "Universitas AMIKOM Yogyakarta",
             "location":"Online",
-            "certificateImg":"ITC21.jpg"
+            "certificateImg":["ITC21.jpg"]
         },
         {
             "title": "Pelatihan Member AMCC 2021/2022",
@@ -133,7 +133,7 @@
             "description": "Mengikuti program pelatihan member Amikom Computer Club divisi Web Programming. Selama priod pelatihan materi yang diberikan mengenai pengembangan website serta proyek mengembangkan website sederhana menggunakan HTML, CSS, JS secara mandiri.",
             "organizer": "Amikom Computer Club (AMCC)",
             "location": "Online",
-            "certificateImg":"AMCC2122.jpg"
+            "certificateImg":["AMCC2122.jpg"]
         },
         {
             "title": "Gelar Karya Mahasiswa 2022/2023",
@@ -143,7 +143,7 @@
             "description": "Mengikuti Gelar Karya Mahasiswa Sistem Informasi (GEMASI) tahun 2022/2023 sebagai Perwakilan Kelas. GEMASI adalah suatu ajang kompetisi untuk mahasiswa di prodi Sistem Informasi. Karya proyek-proyek mata kuliah mahasiswa program studi Sistem Informasi dapat didaftarkan sebagai karya inovasi pada ajang GEMASI.",
             "organizer": "Universitas AMIKOM Yogyakarta",
             "location": "Sleman, DIY",
-            "certificateImg":"GEMASI2223.jpg"
+            "certificateImg":["GEMASI2223.jpg"]
         },
         {
             "title": "Asisten Praktikum Mata Kuliah Pemrograman Terstruktur",
@@ -153,7 +153,7 @@
             "description": "Menjadi Asisten Praktikum Mata Kuliah Pemrograman Terstruktur Program Studi Sistem Informasi Pada Semester Genap TA. 2022/2023. Membantu dosen dalam memberikan materi dan mengevaluasi hasil praktikum.",
             "organizer": "Forum Asisten Universitas AMIKOM Yogyakarta",
             "location": "Sleman, DIY",
-            "certificateImg":"AsprakPT2223.jpg"
+            "certificateImg":["AsprakPT2223.jpg"]
         },
         {
             "title": "Asisten Praktikum Mata Kuliah Struktur Data",
@@ -163,7 +163,7 @@
             "description": "Menjadi Asisten Praktikum Mata Kuliah Struktur Data Program Studi Sistem Informasi Pada Semester Ganjil TA. 2023/2024.",
             "organizer": "Forum Asisten Universitas AMIKOM Yogyakarta",
             "location": "Sleman, DIY",
-            "certificateImg":"AsprakSD2324.jpg"
+            "certificateImg":["AsprakSD2324.jpg"]
         },
         {
             "title": "Asisten Praktikum Mata Kuliah Pemrograman Terstruktur",
@@ -173,7 +173,7 @@
             "description": "Menjadi Asisten Praktikum Mata Kuliah Pemrograman Terstruktur Program Studi Sistem Informasi Pada Semester Genap TA. 2023/2024. Membantu dosen dalam memberikan materi dan mengevaluasi hasil praktikum.",
             "organizer": "Forum Asisten Universitas AMIKOM Yogyakarta",
             "location": "Sleman, DIY",
-            "certificateImg":"AsprakPT2324.jpg"
+            "certificateImg":["AsprakPT2324.jpg"]
         },
         {
             "title": "IFCAMP 2023 HIMA IF x Avip Syaifulloh",
@@ -182,7 +182,7 @@
             "description": "Menjadi peserta program IFCAMP 2023 HIMA IF X Avip Syaifulloh. Acara berlangsung secara daring dengan materi Building Apps with Framework Laravel.",
             "organizer": "Himpunan Mahasiswa S1-Informatika Universitas TELKOM",
             "location":"Online",
-            "certificateImg":"Laravel.jpg"
+            "certificateImg":["Laravel.jpg"]
         },
         {
             "title": "International Bootcamp Data Analyst",
@@ -191,7 +191,7 @@
             "description": "Mengikuti program Data Analyst International Bootcamp diselenggaran oleh SmartPath. Acara pertama bertema Overview of Data Analysis, Career, and Salary",
             "organizer": "SmartPath",
             "location":"Online",
-            "certificateImg":"DTanalis.png"
+            "certificateImg":["DTanalis.png"]
         },
         {
             "title": "International Bootcamp Data Analyst",
@@ -200,7 +200,7 @@
             "description": "Mengikuti program Data Analyst International Bootcamp diselenggaran oleh SmartPath. Tema kedua Mastering SQL Fundamental: From Concept to Application",
             "organizer": "SmartPath",
             "location":"Online",
-            "certificateImg":"MSQL.png"
+            "certificateImg":["MSQL.png"]
         },
         {
             "title": "International Bootcamp Data Analyst",
@@ -209,7 +209,7 @@
             "description": "Mengikuti program Data Analyst International Bootcamp diselenggaran oleh SmartPath. Tema ketiga Elevating Your SQL Skills: Intermediate Techniques for Data Analysis",
             "organizer": "SmartPath",
             "location":"Online",
-            "certificateImg":"SQLSkill.png"
+            "certificateImg":["SQLSkill.png"]
         }
     ],
     "project": [
@@ -255,4 +255,5 @@
         }
     ]
 }
+
 
